@@ -1,4 +1,4 @@
-# jsonpath-js
+# jsonpath-js [![Link Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
 
 An implementation of [JSONPath](http://goessner.net/articles/JsonPath/) Internet-Draft
 
