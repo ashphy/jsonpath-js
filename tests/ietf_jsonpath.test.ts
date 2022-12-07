@@ -71,4 +71,32 @@ describe('IETF Draft JSON Path', () => {
       testJSONPath({ json: json, jsonpath: '$["\\uD83D\\uDE00"]["c"]', expected: "d" });
     });
   });
+
+  describe('3.5.4. Array Slice selector', () => {
+    const json = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+
+    test('Slice with default step', () => {
+      testJSONPath({ json: json, jsonpath: "$[1:3]", expected: ['b', 'c'] });
+    });
+
+    test('Slice with step 2', () => {
+      testJSONPath({ json: json, jsonpath: "$[1:5:2]", expected: ['b', 'd'] });
+    });
+
+    test('Slice with negative step', () => {
+      testJSONPath({ json: json, jsonpath: "$[5:1:-2]", expected: ['f', 'd'] });
+    });
+
+    test('Slice in reverse order', () => {
+      testJSONPath({ json: json, jsonpath: "$[::-1]", expected: ['g', 'f', 'e', 'd', 'c', 'b', 'a'] });
+    });
+
+    test('Slice with default start and end', () => {
+      testJSONPath({ json: json, jsonpath: "$[:]", expected: ['a', 'b', 'c', 'd', 'e', 'f', 'g'] });
+    });
+
+    test('Slice indexes allow spaces', () => {
+      testJSONPath({ json: json, jsonpath: "$[1 : 5 : 2]", expected: ['b', 'd'] });
+    });
+  });
 })

@@ -1,4 +1,5 @@
-import { DotSelector, IndexSelector, MemberNameSelector, Node } from "./node";
+import { ArraySliceSelector, DotSelector, IndexSelector, MemberNameSelector, Node } from "./node";
+import { applySliceSelector } from './parsers/array_slice_selector';
 
 export function parse(json: object, jsonpath: Node[]): object {
   const nodes: Node[] = jsonpath;
@@ -20,6 +21,8 @@ function apply(node: Node, json: any): object {
       return applyDotWildcardSelector(node, json);
     case "IndexSelector":
       return applyIndexSelector(node, json);
+    case "ArraySliceSelector":
+      return applySliceSelector(node, json);
     case "MemberNameSelector":
       return applyMemberNameSelector(node, json);
     default:

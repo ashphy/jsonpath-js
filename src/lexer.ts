@@ -105,6 +105,9 @@ function parseSelectors(scanner: Scanner, nodes: Node[]) {
     case "9":
       parseElementIndex(scanner, nodes);
       break;
+    case ":":
+      parseArraySliceSelector(scanner,  nodes, undefined);
+      break;
     default:
       throw new Error();
   }
@@ -188,16 +191,35 @@ function parseQuotedMemberName(scanner: Scanner, nodes: Node[]) {
 // int             = ["-"] ( "0" / (DIGIT1 *DIGIT) ) ; -  optional
 function parseElementIndex(scanner: Scanner, nodes: Node[]) {
   scanner.consume();
+  const index = parseIntElement(scanner);
 
-  if (scanner.peek() === "-") {
+  const next = scanner.peek();
+
+  if (next !== undefined && isBlankSpace(next)) {
+    scanner.next();
+    consumeBlankSpaces(scanner);
+    scanner.expect(':');
+    parseArraySliceSelector(scanner, nodes, index);
+    return;
+  }
+
+  if (next !== undefined && next === ':') {
+    scanner.expect(':');
+    parseArraySliceSelector(scanner, nodes, index);
+    return;
+  }
+
+  nodes.push({ type: "IndexSelector", index: index });
+}
+
+function parseIntElement(scanner: Scanner): number {
+  if (scanner.peek() === '-') {
     scanner.next();
   }
 
   if (scanner.peek() === '0') {
     scanner.next();
-    const index = parseInt(scanner.consume(), 10);
-    nodes.push({ type: "IndexSelector", index: index });
-    return;
+    return parseInt(scanner.consume(), 10);
   }
 
   const digit1 = scanner.nextOrError();
@@ -209,11 +231,41 @@ function parseElementIndex(scanner: Scanner, nodes: Node[]) {
   while ((c = scanner.next()) != Scanner.EOF) {
     if (!isDigit(c)) {
       scanner.back();
-      const index = parseInt(scanner.consume(), 10);
-      nodes.push({ type: "IndexSelector", index: index });
-      return;
+      return parseInt(scanner.consume(), 10);
     }
   }
+
+  throw new Error(`Unexpected EOF`);
+}
+
+// slice-selector =  [start S] ":" S [end S] [":" [S step ]]
+// start          = int       ; included in selection
+// end            = int       ; not included in selection
+// step           = int       ; default: 1
+function parseArraySliceSelector(scanner: Scanner, nodes: Node[], start: number | undefined) {
+  let end;
+  let step;
+
+  consumeBlankSpaces(scanner);
+
+  if (scanner.peekOrError() === ':') {
+    // end is omitted
+    scanner.expect(':');
+    end = undefined
+  } else {
+    end = parseIntElement(scanner);
+  }
+
+  consumeBlankSpaces(scanner);
+
+  // step
+  if (scanner.peek() === ':') {
+    scanner.expect(':');
+    consumeBlankSpaces(scanner);
+    step = parseIntElement(scanner);
+  }
+
+  nodes.push({ type: "ArraySliceSelector", start: start, end: end, step: step });
 }
 
 // hexchar = non-surrogate / (high-surrogate "\" %x75 low-surrogate)
@@ -391,6 +443,7 @@ function consumeBlankSpaces(scanner: Scanner) {
       break;
     }
   }
+  scanner.consume();
 }
 
 // %x20 / ; Space

@@ -58,6 +58,16 @@ export class Scanner {
     }
   }
 
+  expect(text: string): string {
+    this.next();
+    const consumeText = this.consume();
+    if (consumeText === text) {
+      return consumeText;
+    } else {
+      throw Error(`Expect ${text} but received ${consumeText}`);
+    }
+  }
+
   hasNext(): boolean {
     const nextPosition = this.position + 1;
     return nextPosition < this.text.length;
