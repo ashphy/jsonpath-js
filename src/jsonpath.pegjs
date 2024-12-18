@@ -165,7 +165,14 @@ IndexSelector = index:int { return { type: "IndexSelector", index: index } }
 //                       (["-"] DIGIT1 *DIGIT)      ; - optional
 int
   = "0" { return 0; }
-  / (("-")? DIGIT1 DIGIT*) { return parseInt(text()); }
+  / (("-")? DIGIT1 DIGIT*) {
+      const number =  parseInt(text());
+      if (Number.MIN_SAFE_INTEGER <= number && number <= Number.MAX_SAFE_INTEGER) {
+        return number;
+      } else {
+        throw new Error(`Index must be within the range of I-JSON: ${number}`);
+      }
+    }
 
 // DIGIT1              = %x31-39                    ; 1-9 non-zero digit
 DIGIT1 = [\x31-\x39]

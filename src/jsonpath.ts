@@ -547,8 +547,19 @@ function peg$parse(input, options) {
   var peg$f20 = function() {// @ts-ignore
  return 0; };// @ts-ignore
 
-  var peg$f21 = function() {// @ts-ignore
- return parseInt(text()); };// @ts-ignore
+  var peg$f21 = function() {
+// @ts-ignore
+      const number =  parseInt(text());
+// @ts-ignore
+      if (Number.MIN_SAFE_INTEGER <= number && number <= Number.MAX_SAFE_INTEGER) {
+// @ts-ignore
+        return number;
+// @ts-ignore
+      } else {
+// @ts-ignore
+        throw new Error(`Index must be within the range of I-JSON: ${number}`);
+      }
+    };// @ts-ignore
 
   var peg$f22 = function(start, end, step) {
 // @ts-ignore
