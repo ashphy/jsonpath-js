@@ -105,8 +105,16 @@ ESC = "\x5c"
 //                          ; omit 0x27 '
 //                       %x28-5B /
 //                          ; omit 0x5C \
-//                       %x5D-10FFFF
-Unescaped = [\u0020-\u0021\u0023-\u0026\u0028-\u005B\u005D-\u10FFFF]
+//                       %x5D-D7FF /
+//                          ; skip surrogate code points
+//                       %xE000-10FFFF
+Unescaped
+  = [\u0020-\u0021]
+  / [\u0023-\u0026]
+  / [\u0028-\u005B]
+  / [\u005D-\uD7FF]
+  / [\uE000-\uFFFF] // BMP
+  / $([\ud800-\udbff] [\udc00-\udfff])  // Surrogate Pair
 
 // escapable           = %x62 / ; b BS backspace U+0008
 //                       %x66 / ; f FF form feed U+000C
@@ -135,17 +143,17 @@ Hexchar
 // non-surrogate       = ((DIGIT / "A"/"B"/"C" / "E"/"F") 3HEXDIG) /
 //                        ("D" %x30-37 2HEXDIG )
 NonSurrogate
-  = ((DIGIT / [ABCEF]) HEXDIG|3|)  { return parseInt(text(), 16); }
-  / ("D" [\u0030-\u0037] HEXDIG|2|) { return parseInt(text(), 16); }
+  = ((DIGIT / [ABCEF]i) HEXDIG|3|)  { return parseInt(text(), 16); }
+  / ("D"i [\u0030-\u0037] HEXDIG|2|) { return parseInt(text(), 16); }
 
 // high-surrogate      = "D" ("8"/"9"/"A"/"B") 2HEXDIG
-HighSurrogate = "D" [89AB] HEXDIG|2| { return parseInt(text(), 16); }
+HighSurrogate = "D"i [89AB]i HEXDIG|2| { return parseInt(text(), 16); }
 
 // low-surrogate       = "D" ("C"/"D"/"E"/"F") 2HEXDIG
-LowSurrogate = "D" [CDEF] HEXDIG|2| { return parseInt(text(), 16); }
+LowSurrogate = "D"i [CDEF]i HEXDIG|2| { return parseInt(text(), 16); }
 
 // HEXDIG              = DIGIT / "A" / "B" / "C" / "D" / "E" / "F"
-HEXDIG = DIGIT / [ABCDEF]
+HEXDIG = DIGIT / [ABCDEF]i
 
 // wildcard-selector   = "*"
 WildcardSelector = "*" { return { type: "WildcardSelector" } }
@@ -403,11 +411,16 @@ MemberNameShorthand = NameFirst NameChar* {
   };
 }
 
-// TODO: サロゲートペア対応
 // name-first          = ALPHA /
 //                       "_"   /
 //                       %x80-10FFFF   ; any non-ASCII Unicode character
-NameFirst = ALPHA / "_" / [\u0080-\u10FFFF]
+NameFirst
+  = ALPHA
+  / "_"
+  / [\u0080-\uD7FF] // BMP
+                    // skip surrogate code points
+  / [\uE000-\uFFFF] // BMP
+  / $([\ud800-\udbff] [\udc00-\udfff])  // Surrogate Pair
 
 // name-char           = DIGIT / name-first
 NameChar = DIGIT / NameFirst
