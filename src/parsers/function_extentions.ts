@@ -38,7 +38,7 @@ export const applyFunction = (
     case "search": {
       const node = ValueTypeDef.convert(evaluatedArgs[0]);
       const pattern = ValueTypeDef.convert(evaluatedArgs[1]);
-      return seatch(node, pattern);
+      return search(node, pattern);
     }
     case "value": {
       const nodes = evaluatedArgs[0] as FunctionType.NodesType;
@@ -147,7 +147,7 @@ const match = (
   //
   // Note that where a regexp literal is required, the actual regexp needs to be enclosed in /.
   const ecmaScriptRegexPattern = convertIRegexpToJsRegexp(iRegexpPattern);
-  return new RegExp(`^(?:${ecmaScriptRegexPattern})$`).test(node);
+  return new RegExp(`^(?:${ecmaScriptRegexPattern})$`, "u").test(node);
 };
 
 // 2.4.7. search() Function Extension
@@ -160,7 +160,7 @@ const match = (
 // The search() function extension provides a way to check whether a given string
 // contains a substring that matches a given regular expression,
 // which is in the form described in [RFC9485].
-const seatch = (
+const search = (
   node: FunctionType.ValueType,
   iRegexpPattern: FunctionType.ValueType,
 ): boolean => {
@@ -169,7 +169,7 @@ const seatch = (
   }
 
   const ecmaScriptRegexPattern = convertIRegexpToJsRegexp(iRegexpPattern);
-  return new RegExp(ecmaScriptRegexPattern).test(node);
+  return new RegExp(ecmaScriptRegexPattern, "u").test(node);
 };
 
 // 2.4.8. value() Function Extension
