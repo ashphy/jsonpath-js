@@ -1,20 +1,16 @@
 {
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "CommonJS",
-        "moduleResolution": "Node",
-        "esModuleInterop": true,
-        "strict": true,
-        "lib": [
-            "ESNext"
-        ],
-        "types": [
-            "node",
-            "jest"
-        ],
-        "outDir": "dist"
-    },
-    "include": [
-        "src"
-    ]
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true,
+    "lib": ["ESNext"],
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "allowArbitraryExtensions": true,
+    "noImplicitOverride": true
+  }
 }

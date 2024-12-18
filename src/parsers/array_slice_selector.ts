@@ -1,45 +1,56 @@
-import { ArraySliceSelector } from '../node';
+import { Json } from "../json";
+import { SliceSelector } from "../jsonpath";
+import { NodeList } from "../type";
 
-export function applySliceSelector(node: ArraySliceSelector, json: any): object {
-  if (Array.isArray(json)) {
-    const step = node.step ?? 1;
-    const start = node.start ?? (step >= 0 ? 0 : json.length - 1);
-    const end = node.end ?? (step >= 0 ? json.length : -json.length - 1);
-    const array = [];
-
-    const [lower, upper] = bounds(start, end, step, json.length);
-
-    // IF step > 0 THEN
-    //
-    //   i = lower
-    //   WHILE i < upper:
-    //     SELECT a(i)
-    //     i = i + step
-    //   END WHILE
-    //
-    // ELSE if step < 0 THEN
-    //
-    //   i = upper
-    //   WHILE lower < i:
-    //     SELECT a(i)
-    //     i = i + step
-    //   END WHILE
-    //
-    // END IF
-    if (step > 0) {
-      for (let i = lower; i < upper; i += step) {
-        array.push(json[i]);
-      }
-    } else if (step < 0) {
-      for (let i = upper; lower < i; i += step) {
-        array.push(json[i]);
-      }
-    }
-
-    return array;
-  } else {
-    throw new Error(`JSON node ${JSON.stringify(json)} is not an array`);
+// 2.3.4. Array Slice Selector
+// The array slice selector has the form <start>:<end>:<step>.
+// It matches elements from arrays starting at index < start >
+// and ending at(but not including)<end>,
+// while incrementing by step with a default of 1.
+export function applySliceSelector(
+  selector: SliceSelector,
+  json: Json,
+): NodeList {
+  if (!Array.isArray(json)) {
+    // throw new Error(`JSON node ${JSON.stringify(json)} is not an array`);
+    return [];
   }
+
+  const step = selector.step ?? 1;
+  const start = selector.start ?? (step >= 0 ? 0 : json.length - 1);
+  const end = selector.end ?? (step >= 0 ? json.length : -json.length - 1);
+  const array = [];
+
+  const [lower, upper] = bounds(start, end, step, json.length);
+
+  // IF step > 0 THEN
+  //
+  //   i = lower
+  //   WHILE i < upper:
+  //     SELECT a(i)
+  //     i = i + step
+  //   END WHILE
+  //
+  // ELSE if step < 0 THEN
+  //
+  //   i = upper
+  //   WHILE lower < i:
+  //     SELECT a(i)
+  //     i = i + step
+  //   END WHILE
+  //
+  // END IF
+  if (step > 0) {
+    for (let i = lower; i < upper; i += step) {
+      array.push(json[i]);
+    }
+  } else if (step < 0) {
+    for (let i = upper; lower < i; i += step) {
+      array.push(json[i]);
+    }
+  }
+
+  return array;
 }
 
 // FUNCTION Normalize(i, len):
@@ -69,7 +80,12 @@ function normalized(index: number, length: number): number {
 //   END IF
 //
 //   RETURN (lower, upper)
-function bounds(start: number, end: number, step: number, length: number): [number, number] {
+function bounds(
+  start: number,
+  end: number,
+  step: number,
+  length: number,
+): [number, number] {
   const nStart = normalized(start, length);
   const nEnd = normalized(end, length);
 
