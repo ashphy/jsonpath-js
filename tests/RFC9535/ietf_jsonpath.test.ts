@@ -368,16 +368,6 @@ describe("RFC 9535 JSONPath: Query Expressions for JSON", () => {
             });
           });
         });
-
-        // describe("2.4.5. count() Function Extension", () => {
-        //   it("node list length", () => {
-        //     testJSONPath({
-        //       json: json,
-        //       jsonpath: "$[?count(@.*.author) >= 5]",
-        //       expected: [4, 5, 6],
-        //     });
-        //   });
-        // });
       });
     });
   });

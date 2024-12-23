@@ -11,7 +11,12 @@ describe("JSONPath Compliance Test Suite", () => {
   for (const testCase of cts.tests) {
     if (testCase.invalid_selector) {
       test(testCase.name, () => {
-        expect(() => new JSONPathJS(testCase.selector)).toThrowError();
+        expect(() =>
+          new JSONPathJS(testCase.selector).find({
+            a: "b",
+            c: { d: ["e", "f"], g: "h" },
+          }),
+        ).toThrowError();
       });
     } else {
       test(testCase.name, () => {

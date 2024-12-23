@@ -25,6 +25,7 @@ import { Node, NodeList, Nothing } from "../type";
 import { NodeComparator } from "../comparator/NodeComparator";
 import { applyFunction } from "./function_extentions";
 import { NullComparator } from "../comparator/NullComparator";
+import { FunctionType, isLogicalType } from "../functions/function_types";
 
 // 2.3.5. Filter Selector
 // Filter selectors are used to iterate over the elements or members of structured values
@@ -45,8 +46,7 @@ export function applyFilterSelector(
   }
 
   return toArray(json).filter((item) => {
-    const logical = applyFilterExpression(selector.expr, rootNode, item);
-    return logical;
+    return applyFilterExpression(selector.expr, rootNode, item);
   });
 }
 
@@ -55,7 +55,8 @@ const applyFilterExpression = (
   rootNode: Node,
   json: Json,
 ): boolean => {
-  switch (expr.type) {
+  const expType = expr.type;
+  switch (expType) {
     case "ComparisonExpr":
       return applyCompare(expr, rootNode, json);
     case "TestExpr":
@@ -63,6 +64,8 @@ const applyFilterExpression = (
     case "LogicalBinary":
     case "LogicalUnary":
       return applyLogical(expr, rootNode, json);
+    default:
+      expType satisfies never;
   }
 
   return false;
@@ -92,6 +95,10 @@ export const evalCompare = (
   const leftValue = left;
   const rightValue = right;
 
+  if (isLogicalType(leftValue) || isLogicalType(rightValue)) {
+    throw new Error("LogicalType can't be compared");
+  }
+
   if (isJsonObject(leftValue) && isJsonObject(rightValue)) {
     return ObjectComparator[operator](leftValue, rightValue);
   }
@@ -120,6 +127,7 @@ export const evalCompare = (
   if (operator === "!=") {
     return true;
   }
+
   return false;
 };
 
@@ -174,15 +182,17 @@ const applyQuery = (
     case "FunctionExpr":
       {
         const functionResult = applyFunction(query, rootNode, json);
+
         // LogicalType
-        if (typeof functionResult === "boolean") {
-          return functionResult;
-        }
+        if (functionResult === FunctionType.LogicalTrue) return true;
+        if (functionResult === FunctionType.LogicalFalse) return false;
+
         // NodesType
         if (Array.isArray(functionResult)) {
           return functionResult.length > 0;
         }
         // ValueType
+        throw new Error(`Function ${query.name} result must be compared`);
       }
       break;
     case "CurrentNode": {
