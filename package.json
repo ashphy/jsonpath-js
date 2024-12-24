@@ -1,26 +1,34 @@
 {
   "name": "jsonpath-js",
   "version": "0.0.1",
-  "description": "An implementation of JSONPath Internet-Draft",
+  "description": "An implementation of JSONPath",
+  "author": "ashphy <ne.vivam.si.abis@gmail.com>",
+  "license": "MIT",
+  "repository": "github:ashphy/jsonpath-js",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "main": "dist/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/esm/index.mjs",
   "types": "dist/esm/index.d.ts",
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "files": [
-    "dist"
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "run-p build:*",
-    "build:parser": "ts-node ./builder.ts",
-    "build:common": "tsc",
-    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "tsup ./src",
+    "build:parser": "ts-node ./grammer/builder.ts",
     "test": "vitest"
   },
-  "author": "ashphy",
-  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.5.8",
     "@types/node": "^18.7.3",
@@ -35,9 +43,8 @@
     "npm-run-all": "^4.1.5",
     "peggy": "^3.0.2",
     "prettier": "3.3.3",
-    "rimraf": "^3.0.2",
-    "ts-node": "^10.9.1",
     "ts-pegjs": "^4.2.1",
+    "tsup": "^8.3.5",
     "tsx": "^4.19.2",
     "typescript": "^5.5.3",
     "vitest": "^2.1.4"

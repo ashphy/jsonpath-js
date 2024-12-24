@@ -1,13 +1,13 @@
-# jsonpath-js [![Link Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
+# jsonpath-js
 
-An implementation of [JSONPath](http://goessner.net/articles/JsonPath/) Internet-Draft
+[![Link Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
+![GitHub License](https://img.shields.io/github/license/ashphy/jsonpath-js)
 
-***Important Notice: This project is an initial implementation of [Internet-Draft](https://datatracker.ietf.org/doc/draft-ietf-jsonpath-base/).
-Many breaking changes will be expected.***
+An implementation of RFC 9535 [JSONPath](http://goessner.net/articles/JsonPath/)
 
 ## Features
 
-TBD
+- 100% Compatible with RFC 9535
 
 ## Install
 
@@ -19,4 +19,7 @@ TBD
 
 ## Development
 
-TBD
+```sh
+npm install
+npm run test
+```

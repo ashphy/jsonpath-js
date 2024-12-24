@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "module": "CommonJS",
+    "lib": ["ES2023"],
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "strict": true,
-    "lib": ["ESNext"],
     "types": ["node"],
     "rootDir": ".",
     "outDir": "dist",
     "resolveJsonModule": true,
     "allowArbitraryExtensions": true,
     "noImplicitOverride": true
-  }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }

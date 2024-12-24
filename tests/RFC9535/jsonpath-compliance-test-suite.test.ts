@@ -4,7 +4,7 @@ import { testJSONPath } from "../utils";
 
 import cts from "./jsonpath-compliance-test-suite/cts.json";
 import { JsonValue } from "../../src/json";
-import { JSONPathJS } from "../../src/jsonpathNg";
+import { JSONPathJS } from "../../src/jsonpath_js";
 
 // https://github.com/jsonpath-standard/jsonpath-compliance-test-suite
 describe("JSONPath Compliance Test Suite", () => {
