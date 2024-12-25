@@ -1,5 +1,6 @@
-import { JsonValue } from "../json";
-import { Node, Nothing } from "../type";
+import { JsonValue } from "../types/json";
+import { Node } from "../types/node";
+import { Nothing } from "../types/nothing";
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace FunctionType {

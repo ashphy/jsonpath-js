@@ -15,13 +15,14 @@ import {
 } from "../jsonpath";
 import { applyRoot, applySegments } from "./root";
 import { isJsonArray, isJsonObject, isJsonPrimitive, toArray } from "../utils";
-import { Json } from "../json";
+import { Json } from "../types/json";
 import { StringComparator } from "../comparator/StringComparator";
 import { BooleanComparator } from "../comparator/BooleanComparator";
 import { NumericComparator } from "../comparator/NumericComparator";
 import { ObjectComparator } from "../comparator/ObjectComparator";
 import { ArrayComparator } from "../comparator/ArrayComparator";
-import { Node, NodeList, Nothing } from "../type";
+import { Node, NodeList } from "../types/node";
+import { Nothing } from "../types/nothing";
 import { NodeComparator } from "../comparator/NodeComparator";
 import { applyFunction } from "./function_extentions";
 import { NullComparator } from "../comparator/NullComparator";

@@ -1,5 +1,5 @@
 import { createFunctionDefinition, ValueTypeDef } from "./function_definitions";
-import { Nothing } from "../type";
+import { Nothing } from "../types/nothing";
 import { isJsonObject } from "../utils";
 import { FunctionType } from "./function_types";
 

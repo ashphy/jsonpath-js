@@ -1,5 +1,5 @@
 import { evalCompare } from "../src/parsers/filter_selector";
-import { Nothing } from "../src/type";
+import { Nothing } from "../src/types/nothing";
 import { describe, it, expect } from "vitest";
 
 describe("2.3.5.2.2. Comparisons", () => {

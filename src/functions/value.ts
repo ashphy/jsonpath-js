@@ -3,7 +3,7 @@ import {
   NodesTypeDef,
   ValueTypeDef,
 } from "./function_definitions";
-import { Nothing } from "../type";
+import { Nothing } from "../types/nothing";
 
 // 2.4.8. value() Function Extension
 // Parameters:

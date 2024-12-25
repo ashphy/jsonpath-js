@@ -1,6 +1,7 @@
 import { FunctionType } from "../functions/function_types";
-import { JsonValue } from "../json";
-import { Node, NodeList, Nothing } from "../type";
+import { JsonValue } from "../types/json";
+import { Node, NodeList } from "../types/node";
+import { Nothing } from "../types/nothing";
 import { isJsonPrimitive } from "../utils";
 
 export type FunctionTypeDef<T> = {

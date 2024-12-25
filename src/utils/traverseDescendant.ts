@@ -1,5 +1,5 @@
-import { Json } from "../json";
-import { NodeList } from "../type";
+import { Json } from "../types/json";
+import { NodeList } from "../types/node";
 import { isJsonObject } from "../utils";
 
 export const traverseDescendant = (json: Json) => {

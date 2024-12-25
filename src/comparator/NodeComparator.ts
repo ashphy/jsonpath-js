@@ -1,4 +1,5 @@
-import { Node, Nothing } from "../type";
+import { Node } from "../types/node";
+import { Nothing } from "../types/nothing";
 import { ComparisonOperators } from "./ComparisonOperators";
 
 // When either side of a comparison results in an empty nodelist or the special result Nothing

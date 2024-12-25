@@ -1,6 +1,6 @@
-import { Json } from "../json";
+import { Json } from "../types/json";
 import { SliceSelector } from "../jsonpath";
-import { NodeList } from "../type";
+import { NodeList } from "../types/node";
 
 // 2.3.4. Array Slice Selector
 // The array slice selector has the form <start>:<end>:<step>.

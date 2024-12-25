@@ -1,4 +1,10 @@
-import { Json, JsonArray, JsonObject, JsonPrimitive, JsonValue } from "./json";
+import {
+  Json,
+  JsonArray,
+  JsonObject,
+  JsonPrimitive,
+  JsonValue,
+} from "./types/json";
 
 export const isJsonObject = (json: Json): json is JsonObject => {
   return json !== null && typeof json === "object" && !Array.isArray(json);

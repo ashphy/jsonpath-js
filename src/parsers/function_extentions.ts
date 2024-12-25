@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Json } from "../json";
+import { Json } from "../types/json";
 import { FunctionArgument, FunctionExpr } from "../jsonpath";
-import { Node, NodeList, Nothing } from "../type";
+import { Node, NodeList } from "../types/node";
+import { Nothing } from "../types/nothing";
 import { applyCurrentNode } from "./filter_selector";
 import { applyRoot } from "./root";
 import { extractArgs } from "../functions/function_definitions";

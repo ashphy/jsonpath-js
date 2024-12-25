@@ -1,4 +1,4 @@
-import { JsonArray } from "../json";
+import { JsonArray } from "../types/json";
 import { ComparisonOperators } from "./ComparisonOperators";
 import { isEqual } from "es-toolkit";
 

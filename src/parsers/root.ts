@@ -1,4 +1,4 @@
-import { Json, JsonValue } from "../json";
+import { Json, JsonValue } from "../types/json";
 import {
   ChildSegement,
   DescendantSegment,
@@ -10,7 +10,7 @@ import {
   Selector,
   WildcardSelector,
 } from "../jsonpath";
-import { Node, NodeList } from "../type";
+import { Node, NodeList } from "../types/node";
 import { isJsonObject } from "../utils";
 import { traverseDescendant } from "../utils/traverseDescendant";
 import { applySliceSelector } from "./array_slice_selector";
