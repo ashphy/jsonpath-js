@@ -43,15 +43,7 @@ const json = {
 
 // https://goessner.net/articles/JsonPath/index.html#e2
 describe("Stefan Goessner JsonPath implementation", () => {
-  it.skip("the current object/element", () => {
-    testJSONPath({
-      json: json,
-      jsonpath: "$..book[(@.length-1)]",
-      expected: [book4],
-    });
-  });
-
-  it.skip("child operator", () => {
+  it("child operator", () => {
     testJSONPath({
       json: json,
       jsonpath: "$.store.bicycle.color",
@@ -59,7 +51,7 @@ describe("Stefan Goessner JsonPath implementation", () => {
     });
   });
 
-  it.skip("recursive descent", () => {
+  it("recursive descent", () => {
     testJSONPath({
       json: json,
       jsonpath: "$..author",
@@ -80,11 +72,11 @@ describe("Stefan Goessner JsonPath implementation", () => {
     });
   });
 
-  it.skip("subscript operator", () => {
+  it("subscript operator", () => {
     testJSONPath({ json: json, jsonpath: "$..book[2]", expected: [book3] });
   });
 
-  it.skip("array slice operator borrowed from ES4", () => {
+  it("array slice operator borrowed from ES4", () => {
     testJSONPath({
       json: json,
       jsonpath: "$..book[1:3]",
@@ -92,7 +84,7 @@ describe("Stefan Goessner JsonPath implementation", () => {
     });
   });
 
-  it.skip("array slice operator with slice", () => {
+  it("array slice operator with slice", () => {
     testJSONPath({
       json: json,
       jsonpath: "$..book[0:3:2]",
@@ -100,7 +92,7 @@ describe("Stefan Goessner JsonPath implementation", () => {
     });
   });
 
-  it.skip("array slice operator with end", () => {
+  it("array slice operator with end", () => {
     testJSONPath({
       json: json,
       jsonpath: "$..book[:2]",
@@ -108,7 +100,7 @@ describe("Stefan Goessner JsonPath implementation", () => {
     });
   });
 
-  it.skip("applies a filter expression", () => {
+  it("applies a filter expression", () => {
     testJSONPath({
       json: json,
       jsonpath: "$..book[?(@.isbn)]",
@@ -116,7 +108,7 @@ describe("Stefan Goessner JsonPath implementation", () => {
     });
   });
 
-  it.skip("applies a script expression", () => {
+  it("applies a script expression", () => {
     testJSONPath({
       json: json,
       jsonpath: "$..book[?(@.price<10)]",

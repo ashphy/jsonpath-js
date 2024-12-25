@@ -248,7 +248,7 @@ describe("RFC 9535 JSONPath: Query Expressions for JSON", () => {
         });
       });
 
-      it.skip("Array value regular expression match", () => {
+      it("Array value regular expression match", () => {
         testJSONPath({
           json: json,
           jsonpath: '$.a[?match(@.b, "[jk]")]',
@@ -256,7 +256,7 @@ describe("RFC 9535 JSONPath: Query Expressions for JSON", () => {
         });
       });
 
-      it.skip("Array value regular expression search", () => {
+      it("Array value regular expression search", () => {
         testJSONPath({
           json: json,
           jsonpath: '$.a[?search(@.b, "[jk]")]',
