@@ -1,10 +1,13 @@
 {
   "name": "jsonpath-js",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An implementation of JSONPath",
   "author": "ashphy <ne.vivam.si.abis@gmail.com>",
   "license": "MIT",
-  "repository": "github:ashphy/jsonpath-js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashphy/jsonpath-js.git"
+  },
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -13,8 +16,8 @@
     }
   },
   "main": "dist/index.js",
-  "module": "dist/esm/index.mjs",
-  "types": "dist/esm/index.d.ts",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=18"
   },
@@ -23,6 +26,10 @@
     "package.json",
     "README.md",
     "LICENSE"
+  ],
+  "keywords": [
+    "jsonpath",
+    "json"
   ],
   "scripts": {
     "build": "tsup ./src",

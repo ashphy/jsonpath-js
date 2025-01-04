@@ -1,0 +1,40 @@
+name: Release on npm
+
+on:
+  workflow_run:
+    workflows: ["Lint and Test"]
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      id-token: write
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - id: publish
+        name: Publish to NPM
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+          provenance: true
