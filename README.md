@@ -1,7 +1,8 @@
 # jsonpath-js
 
-[![Link Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
 ![GitHub License](https://img.shields.io/github/license/ashphy/jsonpath-js)
+![NPM Version](https://img.shields.io/npm/v/jsonpath-js)
+[![Link Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
 
 An implementation of RFC 9535 [JSONPath](http://goessner.net/articles/JsonPath/)
 
@@ -11,11 +12,23 @@ An implementation of RFC 9535 [JSONPath](http://goessner.net/articles/JsonPath/)
 
 ## Install
 
-TBD
+```
+npm install jsonpath-js
+```
 
 ## Usage
 
-TBD
+```ts
+import { JSONPathJS } from "jsonpath-js";
+
+const query = new JSONPathJS("$.users[*].name");
+const result = query.find({
+  users: [{ name: "John Doe" }, { name: "Jane Doe" }],
+});
+
+// [ 'John Doe', 'Jane Doe' ]
+console.log(result);
+```
 
 ## Development
 
