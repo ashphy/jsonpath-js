@@ -1,6 +1,6 @@
 import { JsonArray } from "../types/json";
+import { isEqual } from "../utils/isEqual";
 import { ComparisonOperators } from "./ComparisonOperators";
-import { isEqual } from "es-toolkit";
 
 // equal arrays, that is, arrays of the same length where each element of
 // the first array is equal to the corresponding element of the second array, or
