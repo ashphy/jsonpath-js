@@ -1,5 +1,4 @@
-import { describe } from "node:test";
-import { expect, test } from "vitest";
+import { describe, expect, test } from "vitest";
 import { testJSONPath } from "../utils";
 
 import { JSONPathJS } from "../../src/jsonpath_js";

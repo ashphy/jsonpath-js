@@ -10,6 +10,11 @@ An implementation of RFC 9535 [JSONPath](http://goessner.net/articles/JsonPath/)
 
 - 100% Compatible with RFC 9535
 
+## Supported Runtimes
+
+- Node v20+
+- Deno v2+
+
 ## Install
 
 ```
