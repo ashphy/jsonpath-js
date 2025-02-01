@@ -30,9 +30,6 @@ const result = query.find({
 console.log(result);
 ```
 
-## Development
+## Contributing
 
-```sh
-npm install
-npm run test
-```
+Please read the [contributing guide](/docs/CONTRIBUTING.md).
