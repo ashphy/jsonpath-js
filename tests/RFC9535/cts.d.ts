@@ -6,14 +6,14 @@
  */
 
 export type TestCase = {
-  name: TestCaseName;
-  selector: Selector;
-  document?: Document;
-  result?: TestCaseResult;
-  results?: TestCaseResults;
-  invalid_selector?: InvalidSelector;
-  tags?: Tags;
-  [k: string]: unknown;
+	name: TestCaseName;
+	selector: Selector;
+	document?: Document;
+	result?: TestCaseResult;
+	results?: TestCaseResults;
+	invalid_selector?: InvalidSelector;
+	tags?: Tags;
+	[k: string]: unknown;
 } & TestCase1;
 /**
  * The name of the test case
@@ -33,9 +33,9 @@ export type TestCaseResult = unknown[];
  * @minItems 2
  */
 export type TestCaseResults = [
-  TestCaseResult,
-  TestCaseResult,
-  ...TestCaseResult[],
+	TestCaseResult,
+	TestCaseResult,
+	...TestCaseResult[],
 ];
 /**
  * The flag indicating that the selector is not a valid JSONPath selector expression
@@ -43,38 +43,38 @@ export type TestCaseResults = [
 export type InvalidSelector = true;
 export type Tags = string[];
 export type TestCase1 =
-  | {
-      invalid_selector?: never;
-      results?: never;
-      [k: string]: unknown;
-    }
-  | {
-      invalid_selector?: never;
-      result?: never;
-      [k: string]: unknown;
-    }
-  | {
-      document?: never;
-      result?: never;
-      results?: never;
-      [k: string]: unknown;
-    };
+	| {
+			invalid_selector?: never;
+			results?: never;
+			[k: string]: unknown;
+	  }
+	| {
+			invalid_selector?: never;
+			result?: never;
+			[k: string]: unknown;
+	  }
+	| {
+			document?: never;
+			result?: never;
+			results?: never;
+			[k: string]: unknown;
+	  };
 
 /**
  * JSONPath Compliance Test Suite
  */
 export interface ComplianceTestSuite {
-  /**
-   * Individual test cases
-   */
-  tests: TestCase[];
-  [k: string]: unknown;
+	/**
+	 * Individual test cases
+	 */
+	tests: TestCase[];
+	[k: string]: unknown;
 }
 /**
  * The document, the selector is applied to
  */
 export interface Document {
-  [k: string]: unknown;
+	[k: string]: unknown;
 }
 
 declare const data: ComplianceTestSuite;

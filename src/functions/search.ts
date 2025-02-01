@@ -1,10 +1,10 @@
-import {
-  createFunctionDefinition,
-  LogicalTypeDef,
-  ValueTypeDef,
-} from "./function_definitions";
 import { convertIRegexpToJsRegexp } from "../utils/convertIRegexpToJsRegexp";
-import { convertLogicalType, FunctionType } from "./function_types";
+import {
+	LogicalTypeDef,
+	ValueTypeDef,
+	createFunctionDefinition,
+} from "./function_definitions";
+import { FunctionType, convertLogicalType } from "./function_types";
 
 // 2.4.7. search() Function Extension
 // Parameters:
@@ -17,16 +17,16 @@ import { convertLogicalType, FunctionType } from "./function_types";
 // contains a substring that matches a given regular expression,
 // which is in the form described in [RFC9485].
 export const SearchFunction = createFunctionDefinition({
-  name: "search",
-  args: [ValueTypeDef, ValueTypeDef],
-  return: LogicalTypeDef,
-  function: (node, iRegexpPattern) => {
-    if (typeof node !== "string" || typeof iRegexpPattern !== "string") {
-      return FunctionType.LogicalFalse;
-    }
+	name: "search",
+	args: [ValueTypeDef, ValueTypeDef],
+	return: LogicalTypeDef,
+	function: (node, iRegexpPattern) => {
+		if (typeof node !== "string" || typeof iRegexpPattern !== "string") {
+			return FunctionType.LogicalFalse;
+		}
 
-    const ecmaScriptRegexPattern = convertIRegexpToJsRegexp(iRegexpPattern);
-    const testResult = new RegExp(ecmaScriptRegexPattern, "u").test(node);
-    return convertLogicalType(testResult);
-  },
+		const ecmaScriptRegexPattern = convertIRegexpToJsRegexp(iRegexpPattern);
+		const testResult = new RegExp(ecmaScriptRegexPattern, "u").test(node);
+		return convertLogicalType(testResult);
+	},
 });

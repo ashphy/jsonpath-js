@@ -1,60 +1,44 @@
 {
-  "name": "jsonpath-js",
-  "version": "0.1.1",
-  "description": "An implementation of JSONPath",
-  "author": "ashphy <ne.vivam.si.abis@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ashphy/jsonpath-js.git"
-  },
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "engines": {
-    "node": ">=18"
-  },
-  "files": [
-    "dist",
-    "package.json",
-    "README.md",
-    "LICENSE"
-  ],
-  "keywords": [
-    "jsonpath",
-    "json"
-  ],
-  "scripts": {
-    "build": "tsup ./src",
-    "build:parser": "ts-node ./grammer/builder.ts",
-    "test": "vitest"
-  },
-  "devDependencies": {
-    "@types/jest": "^29.5.8",
-    "@types/node": "^18.7.3",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-config-standard-with-typescript": "^39.1.1",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.3.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "npm-run-all": "^4.1.5",
-    "peggy": "^3.0.2",
-    "prettier": "3.3.3",
-    "ts-pegjs": "^4.2.1",
-    "tsup": "^8.3.5",
-    "tsx": "^4.19.2",
-    "typescript": "^5.5.3",
-    "vitest": "^2.1.4"
-  },
-  "dependencies": {}
+	"name": "jsonpath-js",
+	"version": "0.1.1",
+	"description": "An implementation of JSONPath",
+	"author": "ashphy <ne.vivam.si.abis@gmail.com>",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ashphy/jsonpath-js.git"
+	},
+	"exports": {
+		".": {
+			"require": "./dist/index.js",
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"engines": {
+		"node": ">=18"
+	},
+	"files": ["dist", "package.json", "README.md", "LICENSE"],
+	"keywords": ["jsonpath", "json"],
+	"scripts": {
+		"build": "tsup ./src",
+		"build:parser": "ts-node ./grammer/builder.ts",
+		"lint": "biome check",
+		"test": "vitest"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/jest": "^29.5.8",
+		"@types/node": "^18.7.3",
+		"npm-run-all": "^4.1.5",
+		"peggy": "^3.0.2",
+		"ts-pegjs": "^4.2.1",
+		"tsup": "^8.3.5",
+		"tsx": "^4.19.2",
+		"typescript": "^5.5.3",
+		"vitest": "^2.1.4"
+	}
 }

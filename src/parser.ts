@@ -1,9 +1,9 @@
-import { Json } from "./types/json";
-import { JsonpathQuery } from "./jsonpath";
+import type { JsonpathQuery } from "./jsonpath";
 import { applyRoot } from "./parsers/root";
-import { Node, NodeList } from "./types/node";
+import type { Json } from "./types/json";
+import type { Node, NodeList } from "./types/node";
 
 export function run(json: Json, query: JsonpathQuery): NodeList {
-  const rootNode: Node = json;
-  return applyRoot(query, rootNode);
+	const rootNode: Node = json;
+	return applyRoot(query, rootNode);
 }

@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  check-links:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,5 +25,8 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Install
+      - name: Lint
+        run: npx biome ci
+
+      - name: Test
         run: npm run test

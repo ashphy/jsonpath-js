@@ -10,46 +10,46 @@
 //
 // Note that where a regexp literal is required, the actual regexp needs to be enclosed in /.
 export const convertIRegexpToJsRegexp = (pattern: string): string => {
-  let result = "";
-  let inCharClass = false;
-  let inEscape = false;
+	let result = "";
+	let inCharClass = false;
+	let inEscape = false;
 
-  for (let i = 0; i < pattern.length; i++) {
-    const c = pattern[i];
+	for (let i = 0; i < pattern.length; i++) {
+		const c = pattern[i];
 
-    if (inEscape) {
-      result += `\\${c}`;
-      inEscape = false;
-      continue;
-    }
+		if (inEscape) {
+			result += `\\${c}`;
+			inEscape = false;
+			continue;
+		}
 
-    if (c === "\\") {
-      inEscape = true;
-      continue;
-    }
+		if (c === "\\") {
+			inEscape = true;
+			continue;
+		}
 
-    if (c === "[") {
-      inCharClass = true;
-      result += c;
-      continue;
-    }
+		if (c === "[") {
+			inCharClass = true;
+			result += c;
+			continue;
+		}
 
-    if (c === "]") {
-      inCharClass = false;
-      result += c;
-      continue;
-    }
+		if (c === "]") {
+			inCharClass = false;
+			result += c;
+			continue;
+		}
 
-    if (c === "." && !inCharClass && !inEscape) {
-      result += "[^\\n\\r]";
-    } else {
-      result += c;
-    }
-  }
+		if (c === "." && !inCharClass && !inEscape) {
+			result += "[^\\n\\r]";
+		} else {
+			result += c;
+		}
+	}
 
-  if (inEscape) {
-    throw new Error("Invalid I-Regexp: ends with a backslash escape.");
-  }
+	if (inEscape) {
+		throw new Error("Invalid I-Regexp: ends with a backslash escape.");
+	}
 
-  return result;
+	return result;
 };

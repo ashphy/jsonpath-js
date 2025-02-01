@@ -1,3 +1,7 @@
 {
-  "recommendations": ["esbenp.prettier-vscode", "vitest.explorer"]
+	"recommendations": [
+		"PeggyJS.peggy-language",
+		"biomejs.biome",
+		"vitest.explorer"
+	]
 }
