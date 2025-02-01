@@ -8,11 +8,34 @@ on:
   pull_request:
 
 jobs:
+  check-parser-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install
+        run: npm ci
+
+      - name: Copy original parser
+        run: cp -r src/jsonpath.ts ${{ runner.temp }}
+      - name: Build Parser
+        run: npm run build:parser
+      - name: Compare with original parser
+        run: |
+          if ! diff -qr src/jsonpath.ts ${{ runner.temp }}/jsonpath.ts; then
+            echo 'Generated parser code is out of sync. Please run "npm run build:parser", and commit the changes.'
+            exit 1
+          fi
+
   lint-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
@@ -21,7 +44,6 @@ jobs:
         with:
           node-version: 20
           cache: npm
-
       - name: Install
         run: npm ci
 
