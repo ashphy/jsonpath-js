@@ -13,18 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - name: Install
-        run: npm ci
+      - run: npm ci
 
       - name: Copy original parser
         run: cp -r src/jsonpath.ts ${{ runner.temp }}
-      - name: Build Parser
-        run: npm run build:parser
+      - run: npm run build:parser
       - name: Compare with original parser
         run: |
           if ! diff -qr src/jsonpath.ts ${{ runner.temp }}/jsonpath.ts; then
@@ -32,23 +29,58 @@ jobs:
             exit 1
           fi
 
-  lint-and-test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: true
 
-      - name: Setup node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - name: Install
-        run: npm ci
+      - run: npm ci
+      - run: npx biome ci
 
-      - name: Lint
-        run: npx biome ci
+  test-node:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [ 20, 22, 23 ]
+    name: Test on node v${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm run test
 
-      - name: Test
-        run: npm run test
+  test-deno:
+    runs-on: ubuntu-latest
+    name: Test on deno
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: npm ci
+      - run: deno task test
+
+  # See: https://github.com/ashphy/jsonpath-js/issues/5
+  # test-bun:
+  #   runs-on: ubuntu-latest
+  #   name: Test on bun
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
+  #     - uses: oven-sh/setup-bun@v2
+  #     - run: bun install
+  #     - run: bun test
