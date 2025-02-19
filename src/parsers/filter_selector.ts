@@ -198,7 +198,7 @@ const applyQuery = (
 			return applyCurrentNode(query, rootNode, [json]).length > 0;
 		}
 		case "Root": {
-			return applyRoot(query, json).length > 0;
+			return applyRoot(query, rootNode).length > 0;
 		}
 	}
 
