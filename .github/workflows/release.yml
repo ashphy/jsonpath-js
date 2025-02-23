@@ -1,19 +1,14 @@
 name: Release on npm
 
 on:
-  workflow_run:
-    workflows: ["Lint and Test"]
-    types:
-      - completed
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   deploy:
     permissions:
       contents: read
       id-token: write
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
