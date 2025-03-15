@@ -73,14 +73,15 @@ jobs:
       - run: npm ci
       - run: deno task test
 
-  # See: https://github.com/ashphy/jsonpath-js/issues/5
-  # test-bun:
-  #   runs-on: ubuntu-latest
-  #   name: Test on bun
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         submodules: true
-  #     - uses: oven-sh/setup-bun@v2
-  #     - run: bun install
-  #     - run: bun test
+  test-bun:
+    runs-on: ubuntu-latest
+    name: Test on bun
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.5
+      - run: bun install
+      - run: bun test
