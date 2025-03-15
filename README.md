@@ -14,6 +14,7 @@ An implementation of RFC 9535 [JSONPath](http://goessner.net/articles/JsonPath/)
 
 - Node v20+
 - Deno v2+
+- Bun v1.2+
 
 ## Install
 
