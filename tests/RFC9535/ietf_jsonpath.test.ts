@@ -75,7 +75,7 @@ describe("RFC 9535 JSONPath: Query Expressions for JSON", () => {
 			});
 
 			it("Non-deterministic ordering", () => {
-				testJSONPathIgnoreingArrayOrder({
+				testJSONPath({
 					json: json,
 					jsonpath: "$.o[*, *]",
 					expected: [1, 2, 1, 2],

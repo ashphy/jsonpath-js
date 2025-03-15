@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { testJSONPath } from "../utils";
+import { testJSONPath, testNormalizedPath } from "../utils";
 
 import { JSONPathJS } from "../../src/jsonpath_js";
 import type { JsonValue } from "../../src/types/json";
@@ -25,6 +25,16 @@ describe("JSONPath Compliance Test Suite", () => {
 					expected: testCase.result ?? (testCase.results?.[0] as JsonValue),
 				});
 			});
+
+			if (testCase.result_paths) {
+				test(`${testCase.name} Normalized Path`, () => {
+					testNormalizedPath({
+						json: testCase.document as JsonValue,
+						jsonpath: testCase.selector,
+						expected: testCase.result_paths,
+					});
+				});
+			}
 		}
 	}
 });

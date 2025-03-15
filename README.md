@@ -34,6 +34,17 @@ const result = query.find({
 
 // [ 'John Doe', 'Jane Doe' ]
 console.log(result);
+
+
+const pathResult = query.paths({
+	users: [{ name: "John Doe" }, { name: "Jane Doe" }],
+});
+
+// [
+// 	{ value: "John Doe", path: "$['users'][0]['name']" },
+// 	{ value: "Jane Doe", path: "$['users'][1]['name']" },
+// ];
+console.log(pathResult);
 ```
 
 ## Contributing

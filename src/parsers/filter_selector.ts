@@ -1,3 +1,4 @@
+import type { JsonValue } from "../../dist/types/json.d";
 import { ArrayComparator } from "../comparator/ArrayComparator";
 import { BooleanComparator } from "../comparator/BooleanComparator";
 import { NodeComparator } from "../comparator/NodeComparator";
@@ -21,10 +22,10 @@ import type {
 	LogicalOr,
 	TestFilterExpr,
 } from "../jsonpath";
-import type { Json } from "../types/json";
 import type { Node, NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";
 import { isJsonArray, isJsonObject, isJsonPrimitive, toArray } from "../utils";
+import { enumarateNode } from "../utils/enumarateNode";
 import { applyFunction } from "./function_extentions";
 import { applyRoot, applySegments } from "./root";
 
@@ -35,36 +36,36 @@ import { applyRoot, applySegments } from "./root";
 export function applyFilterSelector(
 	selector: FilterSelector,
 	rootNode: Node,
-	json: Json,
+	currentNode: Node,
 ): NodeList {
 	// The filter selector works with arrays and objects exclusively.
 	// Its result is a list of(zero, one, multiple, or all)
 	// their array elements or member values, respectively.
 	// Applied to a primitive value,
 	// it selects nothing(and therefore does not contribute to the result of the filter selector).
-	if (isJsonPrimitive(json)) {
+	if (isJsonPrimitive(currentNode.value)) {
 		return [];
 	}
 
-	return toArray(json).filter((item) => {
-		return applyFilterExpression(selector.expr, rootNode, item);
+	return enumarateNode(currentNode).filter((node) => {
+		return applyFilterExpression(selector.expr, rootNode, node);
 	});
 }
 
 const applyFilterExpression = (
 	expr: FilterExpression,
 	rootNode: Node,
-	json: Json,
+	currentNode: Node,
 ): boolean => {
 	const expType = expr.type;
 	switch (expType) {
 		case "ComparisonExpr":
-			return applyCompare(expr, rootNode, json);
+			return applyCompare(expr, rootNode, currentNode);
 		case "TestExpr":
-			return applyTest(expr, rootNode, json);
+			return applyTest(expr, rootNode, currentNode);
 		case "LogicalBinary":
 		case "LogicalUnary":
-			return applyLogical(expr, rootNode, json);
+			return applyLogical(expr, rootNode, currentNode);
 		default:
 			expType satisfies never;
 	}
@@ -77,16 +78,16 @@ const applyFilterExpression = (
 const applyCompare = (
 	compare: ComparisonExpr,
 	rootNode: Node,
-	json: Json,
+	node: Node,
 ): boolean => {
-	const left = applyComparalbe(compare.left, rootNode, json);
-	const right = applyComparalbe(compare.right, rootNode, json);
+	const left = applyComparalbe(compare.left, rootNode, node);
+	const right = applyComparalbe(compare.right, rootNode, node);
 	return evalCompare(left, right, compare.operator);
 };
 
 export const evalCompare = (
-	left: Node | Nothing,
-	right: Node | Nothing,
+	left: JsonValue | Nothing,
+	right: JsonValue | Nothing,
 	operator: ComparisonOp,
 ): boolean => {
 	if (left === Nothing || right === Nothing) {
@@ -143,21 +144,21 @@ export const applyCurrentNode = (
 const applyComparalbe = (
 	comparable: Comparable,
 	rootNode: Node,
-	json: Json,
-): Node | Nothing => {
+	node: Node,
+): JsonValue | Nothing => {
 	// These can be obtained via literal values; singular queries,
 	// each of which selects at most one node
 	switch (comparable.type) {
 		case "Literal":
 			return comparable.member;
 		case "CurrentNode": {
-			const result = applyCurrentNode(comparable, rootNode, [json]);
-			return result[0] === undefined ? Nothing : result[0];
+			const result = applyCurrentNode(comparable, rootNode, [node]);
+			return result[0] === undefined ? Nothing : result[0].value;
 		}
 		case "Root":
-			return applyRoot(comparable, rootNode)[0] ?? Nothing;
+			return applyRoot(comparable, rootNode)[0]?.value ?? Nothing;
 		case "FunctionExpr":
-			return applyFunction(comparable, rootNode, json);
+			return applyFunction(comparable, rootNode, node);
 	}
 };
 
@@ -166,7 +167,7 @@ const applyComparalbe = (
 const applyTest = (
 	expr: TestFilterExpr,
 	rootNode: Node,
-	json: Json,
+	json: Node,
 ): boolean => {
 	return applyQuery(expr.query, rootNode, json);
 };
@@ -177,7 +178,7 @@ const applyTest = (
 const applyQuery = (
 	query: FunctionExpr | FilterQuery,
 	rootNode: Node,
-	json: Json,
+	json: Node,
 ): boolean => {
 	switch (query.type) {
 		case "FunctionExpr": {
@@ -208,7 +209,7 @@ const applyQuery = (
 const applyLogical = (
 	expr: LogicalExpression,
 	rootNode: Node,
-	json: Json,
+	json: Node,
 ): boolean => {
 	switch (expr.operator) {
 		case "||":
@@ -220,20 +221,20 @@ const applyLogical = (
 	}
 };
 
-const applyOr = (or: LogicalOr, rootNode: Node, json: Json): boolean => {
+const applyOr = (or: LogicalOr, rootNode: Node, json: Node): boolean => {
 	// TODO: make efficient
 	const left = applyFilterExpression(or.left, rootNode, json);
 	const right = applyFilterExpression(or.right, rootNode, json);
 	return left || right;
 };
 
-const applyAnd = (and: LogicalAnd, rootNode: Node, json: Json): boolean => {
+const applyAnd = (and: LogicalAnd, rootNode: Node, json: Node): boolean => {
 	const left = applyFilterExpression(and.left, rootNode, json);
 	const right = applyFilterExpression(and.right, rootNode, json);
 	return left && right;
 };
 
-const applyNot = (not: LogicalNot, rootNode: Node, json: Json): boolean => {
+const applyNot = (not: LogicalNot, rootNode: Node, json: Node): boolean => {
 	const result = applyFilterExpression(not.expr, rootNode, json);
 	return !result;
 };

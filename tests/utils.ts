@@ -28,3 +28,17 @@ export function testJSONPathIgnoreingArrayOrder({
 	const result = path.find(json);
 	expect(result).toEqual(expect.arrayContaining(expected));
 }
+
+export function testNormalizedPath({
+	json,
+	jsonpath,
+	expected,
+}: {
+	json: Json;
+	jsonpath: string;
+	expected: string[];
+}) {
+	const path = new JSONPathJS(jsonpath);
+	const paths = path.paths(json).map((path) => path.path);
+	expect(paths).toStrictEqual(expected);
+}

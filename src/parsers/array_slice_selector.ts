@@ -1,6 +1,5 @@
 import type { SliceSelector } from "../jsonpath";
-import type { Json } from "../types/json";
-import type { NodeList } from "../types/node";
+import { type Node, type NodeList, addIndexPath } from "../types/node";
 
 // 2.3.4. Array Slice Selector
 // The array slice selector has the form <start>:<end>:<step>.
@@ -9,19 +8,20 @@ import type { NodeList } from "../types/node";
 // while incrementing by step with a default of 1.
 export function applySliceSelector(
 	selector: SliceSelector,
-	json: Json,
+	node: Node,
 ): NodeList {
-	if (!Array.isArray(json)) {
+	if (!Array.isArray(node.value)) {
 		// throw new Error(`JSON node ${JSON.stringify(json)} is not an array`);
 		return [];
 	}
 
 	const step = selector.step ?? 1;
-	const start = selector.start ?? (step >= 0 ? 0 : json.length - 1);
-	const end = selector.end ?? (step >= 0 ? json.length : -json.length - 1);
-	const array = [];
+	const start = selector.start ?? (step >= 0 ? 0 : node.value.length - 1);
+	const end =
+		selector.end ?? (step >= 0 ? node.value.length : -node.value.length - 1);
+	const array: NodeList = [];
 
-	const [lower, upper] = bounds(start, end, step, json.length);
+	const [lower, upper] = bounds(start, end, step, node.value.length);
 
 	// IF step > 0 THEN
 	//
@@ -42,11 +42,11 @@ export function applySliceSelector(
 	// END IF
 	if (step > 0) {
 		for (let i = lower; i < upper; i += step) {
-			array.push(json[i]);
+			array.push(addIndexPath(node, node.value[i], i));
 		}
 	} else if (step < 0) {
 		for (let i = upper; lower < i; i += step) {
-			array.push(json[i]);
+			array.push(addIndexPath(node, node.value[i], i));
 		}
 	}
 

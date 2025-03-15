@@ -9,8 +9,12 @@ import type {
 	Selector,
 	WildcardSelector,
 } from "../jsonpath";
-import type { Json, JsonValue } from "../types/json";
-import type { Node, NodeList } from "../types/node";
+import {
+	type Node,
+	type NodeList,
+	addIndexPath,
+	addMemberPath,
+} from "../types/node";
 import { isJsonObject } from "../utils";
 import { traverseDescendant } from "../utils/traverseDescendant";
 import { applySliceSelector } from "./array_slice_selector";
@@ -46,12 +50,12 @@ export function applySegments(
 export function applySegment(
 	segment: ChildSegement | DescendantSegment,
 	rootNode: Node,
-	json: Json,
+	currentNode: Node,
 ): NodeList {
 	if (Array.isArray(segment)) {
 		// ChildSegement
 		const selectorResults = segment.map((selector) => {
-			const selectorResult = applySelector(selector, rootNode, json);
+			const selectorResult = applySelector(selector, rootNode, currentNode);
 			return selectorResult;
 		});
 		const segementResult = selectorResults
@@ -60,7 +64,7 @@ export function applySegment(
 		return segementResult;
 	}
 	// DescendantSegment
-	const descendantNodes = traverseDescendant(json);
+	const descendantNodes = traverseDescendant(currentNode);
 	return descendantNodes.flatMap((node) => {
 		return segment.selectors.flatMap((selector) => {
 			return applySelector(selector, rootNode, node);
@@ -73,22 +77,22 @@ export function applySegment(
 function applySelector(
 	selector: Selector | MemberNameShorthand,
 	rootNode: Node,
-	json: Json,
+	currentNode: Node,
 ): NodeList {
 	const type = selector.type;
 	switch (type) {
 		case "WildcardSelector":
-			return applyWildcardSelector(selector, json);
+			return applyWildcardSelector(selector, currentNode);
 		case "IndexSelector":
-			return applyIndexSelector(selector, json);
+			return applyIndexSelector(selector, currentNode);
 		case "SliceSelector":
-			return applySliceSelector(selector, json);
+			return applySliceSelector(selector, currentNode);
 		case "MemberNameShorthand":
-			return applyMemberNameSelector(selector, json);
+			return applyMemberNameSelector(selector, currentNode);
 		case "NameSelector":
-			return applyMemberNameSelector(selector, json);
+			return applyMemberNameSelector(selector, currentNode);
 		case "FilterSelector":
-			return applyFilterSelector(selector, rootNode, json);
+			return applyFilterSelector(selector, rootNode, currentNode);
 		default:
 			return type satisfies never;
 	}
@@ -96,20 +100,26 @@ function applySelector(
 
 // 2.3.2. Wildcard Selector
 // A wildcard selector selects the nodes of all children of an object or array.
-function applyWildcardSelector(node: WildcardSelector, json: Json): NodeList {
+function applyWildcardSelector(
+	selector: WildcardSelector,
+	node: Node,
+): NodeList {
 	const results: NodeList = [];
+	const json = node.value;
 
 	if (Array.isArray(json)) {
 		for (const a in json) {
-			if (Object.prototype.hasOwnProperty.call(json, a)) {
+			// TODO: ここfor ofじゃね？
+			if (Object.prototype.hasOwnProperty.call(node.value, a)) {
 				// Note that the children of an object are its member values, not its member names.
-				results.push(json[a] as JsonValue);
+				// results.push({ json: json[a], path: `${node.path}[${a}]` });
+				results.push(addIndexPath(node, json[a], Number(a)));
 			}
 		}
 	} else if (isJsonObject(json)) {
 		for (const a in json) {
 			if (Object.prototype.hasOwnProperty.call(json, a)) {
-				results.push(json[a] as JsonValue);
+				results.push(addMemberPath(node, json[a], a));
 			}
 		}
 	}
@@ -123,17 +133,17 @@ function applyWildcardSelector(node: WildcardSelector, json: Json): NodeList {
 // A name selector '<name>' selects at most one object member value.
 function applyMemberNameSelector(
 	selector: MemberNameShorthand | NameSelector,
-	json: Json,
+	node: Node,
 ): NodeList {
 	// Nothing is selected from a value that is not an object.
-	if (!isJsonObject(json)) {
+	if (!isJsonObject(node.value)) {
 		return [];
 	}
 
 	// Applying the name-selector to an object node
 	// selects a member value whose name equals the member name M
-	if (selector.member in json) {
-		return [json[selector.member]];
+	if (selector.member in node.value) {
+		return [addMemberPath(node, node.value[selector.member], selector.member)];
 	}
 	// or selects nothing if there is no such member value.
 	return [];
@@ -141,11 +151,17 @@ function applyMemberNameSelector(
 
 // 2.3.3. Index Selector
 // An index selector <index> matches at most one array element value.
-function applyIndexSelector(node: IndexSelector, json: Json): NodeList {
-	if (Array.isArray(json)) {
-		if (node.index < json.length) {
-			const result = json.at(node.index);
-			return result === undefined ? [] : [result];
+function applyIndexSelector(selector: IndexSelector, node: Node): NodeList {
+	if (Array.isArray(node.value)) {
+		// If the index is negative, it counts from the end of the array.
+		const adjustedIndex =
+			selector.index < 0 ? node.value.length + selector.index : selector.index;
+
+		if (0 <= adjustedIndex && adjustedIndex < node.value.length) {
+			const result = node.value.at(adjustedIndex);
+			return result === undefined
+				? []
+				: [addIndexPath(node, result, adjustedIndex)];
 		}
 		// Index out of bounds
 		return [];

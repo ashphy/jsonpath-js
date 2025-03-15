@@ -1,21 +1,12 @@
-import type { Json } from "../types/json";
-import type { NodeList } from "../types/node";
-import { isJsonObject } from "../utils";
+import type { Node, NodeList } from "../types/node";
+import { enumarateNode } from "./enumarateNode";
 
-export const traverseDescendant = (json: Json) => {
+export const traverseDescendant = (node: Node): NodeList => {
 	const nodelist: NodeList = [];
-	nodelist.push(json);
+	nodelist.push(node);
 
-	if (Array.isArray(json)) {
-		for (const node of json) {
-			nodelist.push(...traverseDescendant(node));
-		}
-	} else if (isJsonObject(json)) {
-		for (const key in json) {
-			if (Object.prototype.hasOwnProperty.call(json, key)) {
-				nodelist.push(...traverseDescendant(json[key]));
-			}
-		}
+	for (const child of enumarateNode(node)) {
+		nodelist.push(...traverseDescendant(child));
 	}
 
 	return nodelist;

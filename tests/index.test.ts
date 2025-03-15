@@ -68,7 +68,11 @@ describe("Stefan Goessner JsonPath implementation", () => {
 	});
 
 	it("subscript operator", () => {
-		testJSONPath({ json: json, jsonpath: "$..book[2]", expected: [book3] });
+		testJSONPath({
+			json: json,
+			jsonpath: "$..book[2]",
+			expected: [book3],
+		});
 	});
 
 	it("array slice operator borrowed from ES4", () => {
