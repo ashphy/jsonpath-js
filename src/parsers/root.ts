@@ -109,7 +109,6 @@ function applyWildcardSelector(
 
 	if (Array.isArray(json)) {
 		for (const a in json) {
-			// TODO: ここfor ofじゃね？
 			if (Object.prototype.hasOwnProperty.call(node.value, a)) {
 				// Note that the children of an object are its member values, not its member names.
 				// results.push({ json: json[a], path: `${node.path}[${a}]` });

@@ -19,7 +19,6 @@ export function enumerateNode(node: Node): NodeList {
 	if (isJsonObject(json)) {
 		return Object.entries(json).map(([key, value]) => {
 			return addMemberPath(node, value, key);
-			// return { json: value, path: `${path}['${escapeMemberName(key)}']` };
 		});
 	}
 	return [];
