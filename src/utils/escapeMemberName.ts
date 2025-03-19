@@ -5,9 +5,7 @@
  * @returns
  */
 export const escapeMemberName = (name: string): string => {
-	// eslint-disable-next-line no-control-regex
-	// TODO: Add explanation
-	// biome-ignore lint/suspicious/noControlCharactersInRegex: <explanation>
+	// biome-ignore lint/suspicious/noControlCharactersInRegex: This regex is used to escape control characters
 	return name.replace(/['\\\b\f\n\r\t\u0000-\u001F]/g, (char) => {
 		switch (char) {
 			case "'":
