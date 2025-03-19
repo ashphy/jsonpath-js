@@ -36,18 +36,18 @@ import { applyRoot, applySegments } from "./root";
 export function applyFilterSelector(
 	selector: FilterSelector,
 	rootNode: Node,
-	currentNode: Node,
+	node: Node,
 ): NodeList {
 	// The filter selector works with arrays and objects exclusively.
 	// Its result is a list of(zero, one, multiple, or all)
 	// their array elements or member values, respectively.
 	// Applied to a primitive value,
 	// it selects nothing(and therefore does not contribute to the result of the filter selector).
-	if (isJsonPrimitive(currentNode.value)) {
+	if (isJsonPrimitive(node.value)) {
 		return [];
 	}
 
-	return enumerateNode(currentNode).filter((node) => {
+	return enumerateNode(node).filter((node) => {
 		return applyFilterExpression(selector.expr, rootNode, node);
 	});
 }
@@ -55,17 +55,17 @@ export function applyFilterSelector(
 const applyFilterExpression = (
 	expr: FilterExpression,
 	rootNode: Node,
-	currentNode: Node,
+	node: Node,
 ): boolean => {
 	const expType = expr.type;
 	switch (expType) {
 		case "ComparisonExpr":
-			return applyCompare(expr, rootNode, currentNode);
+			return applyCompare(expr, rootNode, node);
 		case "TestExpr":
-			return applyTest(expr, rootNode, currentNode);
+			return applyTest(expr, rootNode, node);
 		case "LogicalBinary":
 		case "LogicalUnary":
-			return applyLogical(expr, rootNode, currentNode);
+			return applyLogical(expr, rootNode, node);
 		default:
 			expType satisfies never;
 	}

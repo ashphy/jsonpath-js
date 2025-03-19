@@ -50,12 +50,12 @@ export function applySegments(
 export function applySegment(
 	segment: ChildSegement | DescendantSegment,
 	rootNode: Node,
-	currentNode: Node,
+	node: Node,
 ): NodeList {
 	if (Array.isArray(segment)) {
 		// ChildSegement
 		const selectorResults = segment.map((selector) => {
-			const selectorResult = applySelector(selector, rootNode, currentNode);
+			const selectorResult = applySelector(selector, rootNode, node);
 			return selectorResult;
 		});
 		const segementResult = selectorResults
@@ -64,7 +64,7 @@ export function applySegment(
 		return segementResult;
 	}
 	// DescendantSegment
-	const descendantNodes = traverseDescendant(currentNode);
+	const descendantNodes = traverseDescendant(node);
 	return descendantNodes.flatMap((node) => {
 		return segment.selectors.flatMap((selector) => {
 			return applySelector(selector, rootNode, node);
@@ -77,22 +77,22 @@ export function applySegment(
 function applySelector(
 	selector: Selector | MemberNameShorthand,
 	rootNode: Node,
-	currentNode: Node,
+	node: Node,
 ): NodeList {
 	const type = selector.type;
 	switch (type) {
 		case "WildcardSelector":
-			return applyWildcardSelector(selector, currentNode);
+			return applyWildcardSelector(selector, node);
 		case "IndexSelector":
-			return applyIndexSelector(selector, currentNode);
+			return applyIndexSelector(selector, node);
 		case "SliceSelector":
-			return applySliceSelector(selector, currentNode);
+			return applySliceSelector(selector, node);
 		case "MemberNameShorthand":
-			return applyMemberNameSelector(selector, currentNode);
+			return applyMemberNameSelector(selector, node);
 		case "NameSelector":
-			return applyMemberNameSelector(selector, currentNode);
+			return applyMemberNameSelector(selector, node);
 		case "FilterSelector":
-			return applyFilterSelector(selector, rootNode, currentNode);
+			return applyFilterSelector(selector, rootNode, node);
 		default:
 			return type satisfies never;
 	}

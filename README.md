@@ -4,6 +4,9 @@
 [![NPM Version](https://img.shields.io/npm/v/jsonpath-js)](https://www.npmjs.com/package/jsonpath-js)
 [![Link Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
 
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
 An implementation of RFC 9535 [JSONPath](http://goessner.net/articles/JsonPath/)
 
 ## Features
