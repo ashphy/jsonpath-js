@@ -4,6 +4,9 @@
 [![NPM Version](https://img.shields.io/npm/v/jsonpath-js)](https://www.npmjs.com/package/jsonpath-js)
 [![Link Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
 
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
 An implementation of RFC 9535 [JSONPath](http://goessner.net/articles/JsonPath/)
 
 ## Features
@@ -34,6 +37,17 @@ const result = query.find({
 
 // [ 'John Doe', 'Jane Doe' ]
 console.log(result);
+
+
+const pathResult = query.paths({
+	users: [{ name: "John Doe" }, { name: "Jane Doe" }],
+});
+
+// [
+// 	{ value: "John Doe", path: "$['users'][0]['name']" },
+// 	{ value: "Jane Doe", path: "$['users'][1]['name']" },
+// ];
+console.log(pathResult);
 ```
 
 ## Contributing

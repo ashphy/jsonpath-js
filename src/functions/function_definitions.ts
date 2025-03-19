@@ -1,6 +1,6 @@
 import { FunctionType } from "../functions/function_types";
-import type { JsonValue } from "../types/json";
-import type { Node, NodeList } from "../types/node";
+import type { Json, JsonValue } from "../types/json";
+import { type Node, type NodeList, isNode, isNodeList } from "../types/node";
 import { Nothing } from "../types/nothing";
 import { isJsonPrimitive } from "../utils";
 
@@ -19,9 +19,10 @@ export const ValueTypeDef: FunctionTypeDef<FunctionType.ValueType> = {
 	convert: (arg) => {
 		if (arg === Nothing) return arg;
 		if (isJsonPrimitive(arg)) return arg;
-		if (Array.isArray(arg)) {
+		if (isNode(arg)) return arg.value;
+		if (isNodeList(arg)) {
 			if (arg.length === 0) return Nothing;
-			if (arg.length === 1) return arg[0];
+			if (arg.length === 1) return arg[0].value;
 		}
 
 		throw new Error(
@@ -33,7 +34,7 @@ export const ValueTypeDef: FunctionTypeDef<FunctionType.ValueType> = {
 export const NodesTypeDef: FunctionTypeDef<FunctionType.NodesType> = {
 	type: "NodesType",
 	convert: (arg) => {
-		if (Array.isArray(arg)) return arg;
+		if (isNodeList(arg)) return arg;
 
 		throw new Error(
 			`Invalid argument type "${JSON.stringify(arg)}" is not a NodesType`,
@@ -96,7 +97,7 @@ export const extractArgs = <
 	Return extends FunctionTypeDef<unknown>,
 >(
 	functionDefinition: FunctionDefinition<Args, Return>,
-	args: (Node | NodeList | Nothing)[],
+	args: (Json | Node | NodeList | Nothing)[],
 ) => {
 	const argDefs = functionDefinition.args;
 	if (args.length !== argDefs.length) {

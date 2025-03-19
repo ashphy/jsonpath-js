@@ -61,17 +61,17 @@ export const applyFunction = (
 const applyFunctionArgument = (
 	argument: FunctionArgument,
 	rootNode: Node,
-	json: Json,
-): Node | NodeList | Nothing => {
+	node: Node,
+): Json | Node | NodeList | Nothing => {
 	switch (argument.type) {
 		case "Literal":
 			return argument.member;
 		case "CurrentNode":
-			return applyCurrentNode(argument, rootNode, [json]);
+			return applyCurrentNode(argument, rootNode, [node]);
 		case "Root":
 			return applyRoot(argument, rootNode);
 		case "FunctionExpr":
-			return applyFunction(argument, rootNode, json);
+			return applyFunction(argument, rootNode, node);
 		default:
 			// TODO: remove default case
 			throw new Error(`Unknown argument type "${argument.type}"`);

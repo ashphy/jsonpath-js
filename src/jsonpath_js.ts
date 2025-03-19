@@ -2,6 +2,11 @@ import { type JsonpathQuery, parse } from "./jsonpath";
 import { run } from "./parser";
 import type { Json } from "./types/json";
 
+type PathResult = {
+	value: Json;
+	path: string;
+};
+
 export class JSONPathJS {
 	rootNode: JsonpathQuery;
 
@@ -12,6 +17,20 @@ export class JSONPathJS {
 
 	find(json: Json): Json {
 		const resultNodeList = run(json, this.rootNode);
-		return resultNodeList.filter((json) => json !== undefined);
+		return resultNodeList
+			.filter((json) => json !== undefined)
+			.map((json) => json.value);
+	}
+
+	paths(json: Json): PathResult[] {
+		const resultNodeList = run(json, this.rootNode);
+		return resultNodeList
+			.filter((json) => json !== undefined)
+			.map((json) => {
+				return {
+					value: json.value,
+					path: json.path,
+				};
+			});
 	}
 }
