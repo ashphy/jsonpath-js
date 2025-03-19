@@ -5,7 +5,7 @@
 [![Link Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
 
 > [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
+> This library is still in its initial development stage, so please be aware that the API is subject to change.
 
 An implementation of RFC 9535 [JSONPath](http://goessner.net/articles/JsonPath/)
 
