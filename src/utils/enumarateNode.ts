@@ -6,7 +6,7 @@ import {
 } from "../types/node";
 import { isJsonArray, isJsonObject, isJsonPrimitive } from "../utils";
 
-export function enumarateNode(node: Node): NodeList {
+export function enumerateNode(node: Node): NodeList {
 	const { value: json, path } = node;
 	if (isJsonPrimitive(json)) {
 		return [];

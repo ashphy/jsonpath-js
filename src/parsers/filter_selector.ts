@@ -25,7 +25,7 @@ import type {
 import type { Node, NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";
 import { isJsonArray, isJsonObject, isJsonPrimitive, toArray } from "../utils";
-import { enumarateNode } from "../utils/enumarateNode";
+import { enumerateNode } from "../utils/enumarateNode";
 import { applyFunction } from "./function_extentions";
 import { applyRoot, applySegments } from "./root";
 
@@ -47,7 +47,7 @@ export function applyFilterSelector(
 		return [];
 	}
 
-	return enumarateNode(currentNode).filter((node) => {
+	return enumerateNode(currentNode).filter((node) => {
 		return applyFilterExpression(selector.expr, rootNode, node);
 	});
 }

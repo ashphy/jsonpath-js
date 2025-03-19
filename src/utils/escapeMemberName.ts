@@ -1,5 +1,5 @@
 /**
- * Escape a member name for nomalized path
+ * Escape a member name for normalized path
  * See: https://www.rfc-editor.org/rfc/rfc9535.html#section-2.7
  * @param name
  * @returns
