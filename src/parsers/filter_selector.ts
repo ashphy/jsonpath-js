@@ -1,4 +1,4 @@
-import type { JsonValue } from "../../dist/types/json.d";
+import type { JsonValue } from "../types/json.d";
 import { ArrayComparator } from "../comparator/ArrayComparator";
 import { BooleanComparator } from "../comparator/BooleanComparator";
 import { NodeComparator } from "../comparator/NodeComparator";
