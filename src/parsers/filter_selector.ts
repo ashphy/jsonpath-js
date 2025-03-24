@@ -1,4 +1,3 @@
-import type { JsonValue } from "../types/json.d";
 import { ArrayComparator } from "../comparator/ArrayComparator";
 import { BooleanComparator } from "../comparator/BooleanComparator";
 import { NodeComparator } from "../comparator/NodeComparator";
@@ -22,6 +21,7 @@ import type {
 	LogicalOr,
 	TestFilterExpr,
 } from "../jsonpath";
+import type { JsonValue } from "../types/json.d";
 import type { Node, NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";
 import { isJsonArray, isJsonObject, isJsonPrimitive, toArray } from "../utils";
