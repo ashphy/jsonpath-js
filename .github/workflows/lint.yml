@@ -48,7 +48,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [ 20, 22, 23 ]
+        node: [ 20, 22, 24 ]
     name: Test on node v${{ matrix.node }}
     steps:
       - uses: actions/checkout@v4
