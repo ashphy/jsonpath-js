@@ -1,4 +1,4 @@
-import type { JsonpathQuery } from "./jsonpath";
+import type { JsonpathQuery } from "./grammer/ast";
 import { applyRoot } from "./parsers/root";
 import type { Json } from "./types/json";
 import { type Node, type NodeList, createNode } from "./types/node";

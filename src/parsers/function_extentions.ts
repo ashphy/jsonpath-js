@@ -5,7 +5,7 @@ import { LengthFunction } from "../functions/length";
 import { MatchFunction } from "../functions/match";
 import { SearchFunction } from "../functions/search";
 import { ValueFunction } from "../functions/value";
-import type { FunctionArgument, FunctionExpr } from "../jsonpath";
+import type { FunctionArgument, FunctionExpr } from "../grammer/ast";
 import type { Json } from "../types/json";
 import type { Node, NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";

@@ -5,10 +5,10 @@ import type {
 	JsonpathQuery,
 	MemberNameShorthand,
 	NameSelector,
-	Segments,
+	Segment,
 	Selector,
 	WildcardSelector,
-} from "../jsonpath";
+} from "../grammer/ast";
 import {
 	type Node,
 	type NodeList,
@@ -31,7 +31,7 @@ export function applyRoot(root: JsonpathQuery, rootNode: Node): NodeList {
 // to the node and concatenate the results of each selector into per - input - node nodelists,
 // which are then concatenated in the order of the input nodelist to form a single segment result nodelist.
 export function applySegments(
-	segments: Segments,
+	segments: Segment[],
 	rootNode: Node,
 	nodeList: NodeList,
 ): NodeList {

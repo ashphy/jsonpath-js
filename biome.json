@@ -23,7 +23,8 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true
-		}
+		},
+		"ignore": ["src/grammer/jsonpath_js.js", "src/grammer/jsonpath_js.d.ts"]
 	},
 	"javascript": {
 		"formatter": {
