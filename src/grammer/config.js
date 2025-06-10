@@ -4,6 +4,6 @@ module.exports = {
 	dts: "true",
 	output: "src/grammer/jsonpath_js.js",
 	returnTypes: {
-		JsonpathQuery: "import('./ast.d.ts').JsonpathQuery"
-	}
+		JsonpathQuery: "import('./ast.d.ts').JsonpathQuery",
+	},
 };
