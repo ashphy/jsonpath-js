@@ -52,8 +52,8 @@ export function applySegment(
 	rootNode: Node,
 	node: Node,
 ): NodeList {
+	// ChildSegement
 	if (Array.isArray(segment)) {
-		// ChildSegement
 		const selectorResults = segment.map((selector) => {
 			const selectorResult = applySelector(selector, rootNode, node);
 			return selectorResult;
@@ -63,6 +63,7 @@ export function applySegment(
 			.filter((e) => e !== undefined);
 		return segementResult;
 	}
+
 	// DescendantSegment
 	const descendantNodes = traverseDescendant(node);
 	return descendantNodes.flatMap((node) => {

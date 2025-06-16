@@ -107,19 +107,10 @@ export type ChildSegement =
 	| BracketedSelection
 	| [WildcardSelector | MemberNameShorthand];
 
-export type DescendantSegment =
-	| {
-			type: string;
-			selectors: BracketedSelection | WildcardSelector | MemberNameShorthand;
-	  }
-	| {
-			type: string;
-			selectors: (
-				| BracketedSelection
-				| WildcardSelector
-				| MemberNameShorthand
-			)[];
-	  };
+export type DescendantSegment = {
+	type: "DescendantSegment";
+	selectors: BracketedSelection | (WildcardSelector | MemberNameShorthand)[];
+};
 
 export type Segment = ChildSegement | DescendantSegment;
 export type Root = {
