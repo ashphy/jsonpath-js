@@ -2,8 +2,8 @@
 // Primitive Types
 // ============================================================================
 export type StringLiteral = string;
-export type Int = 0 | number;
-export type Number_1 = number;
+export type Int = number;
+export type Number = number;
 export type True = boolean;
 export type False = boolean;
 export type Null = null;
@@ -13,7 +13,7 @@ export type Null = null;
 // ============================================================================
 export type Literal = {
 	type: "Literal";
-	member: Number_1 | StringLiteral | True | False | Null;
+	member: Number | StringLiteral | True | False | Null;
 };
 
 // ============================================================================
@@ -26,7 +26,7 @@ export type SliceSelector = {
 	type: "SliceSelector";
 	start: Int | null;
 	end: Int | null;
-	step: (Int | null) | null;
+	step: Int | null;
 };
 export type FilterSelector = { type: "FilterSelector"; expr: LogicalOrExpr };
 
