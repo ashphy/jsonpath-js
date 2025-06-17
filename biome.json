@@ -9,12 +9,15 @@
 		"ignoreUnknown": false,
 		"ignore": [
 			"src/jsonpath.ts",
+			"src/grammar/jsonpath_js.js",
+			"src/grammar/jsonpath_js.d.ts",
 			"tests/RFC9535/jsonpath-compliance-test-suite/*"
 		]
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"indentStyle": "tab",
+		"ignore": ["**/package.json"]
 	},
 	"organizeImports": {
 		"enabled": true
@@ -23,7 +26,8 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true
-		}
+		},
+		"ignore": ["package.json"]
 	},
 	"javascript": {
 		"formatter": {

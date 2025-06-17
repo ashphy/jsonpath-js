@@ -1,4 +1,5 @@
-import { type JsonpathQuery, parse } from "./jsonpath";
+import type { JsonpathQuery } from "./grammar/ast";
+import { parse } from "./grammar/jsonpath_js";
 import { run } from "./parser";
 import type { Json } from "./types/json";
 

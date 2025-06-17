@@ -1,5 +1,5 @@
 {{
-	function buildLogicalExpression(head, tail): FilterExpression {
+	function buildLogicalExpression(head, tail) {
 		return tail.reduce(function(result, element) {
 			return {
 				type: "LogicalBinary",
@@ -10,7 +10,7 @@
 		}, head);
 	}
 
-	function buildUnaryExpression(not, query): TestExpression {
+	function buildUnaryExpression(not, query) {
 		if (not) {
 			return {
 				type: "LogicalUnary",
@@ -29,7 +29,7 @@ JsonpathQuery
 			return { 
 				type: "Root", 
 				segments: segments
-			} as Root;
+			};
 		}
 
 // segments						= *(S segment)
@@ -230,7 +230,7 @@ ParenExpr = not:(@LogicalNotOp S)? "(" S expr:LogicalExpr S ")" {
 			type: "LogicalUnary",
 			operator: "!",
 			expr: expr
-		} as LogicalNot;
+		};
 	}
 
 	return expr;
@@ -315,7 +315,7 @@ AbsSingularQuery = RootIdentifier segments:SingularQuerySegments {
 	return { 
 		type: "Root",
 		segments: segments
-	} as Root
+	}
 }
 
 // singular-query-segments = *(S (name-segment / index-segment))
@@ -381,11 +381,7 @@ FunctionExpr = name:FunctionName "(" S args:(@FunctionArgument @(S "," S @Functi
 		type: "FunctionExpr",
 		name: name,
 		args: [head].concat(tail)
-	} as {
-		type: "FunctionExpr",
-		name: string,
-		args: FunctionArgument[]
-	};
+	}
 }
 
 // function-argument	 = literal /

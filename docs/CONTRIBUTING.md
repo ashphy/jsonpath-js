@@ -11,7 +11,7 @@ This parser uses [Peggy](https://peggyjs.org/) as a parser generator.
 ```
 ├── dist:        # Build files
 ├── docs:        # Documents
-├── grammer:     # Ppeggy grammer file
+├── grammar:     # Ppeggy grammar file
 ├── src:         # Source Codes
 └── tests:       # Tests
     ├── RFC9535: # Compatibility Test
@@ -35,7 +35,7 @@ npm run test
 
 ### Building the Parser
 
-If you modify the `grammer/jsonpath.pegjs` file, please rebuild the parser.
+If you modify the `grammar/jsonpath.pegjs` file, please rebuild the parser.
 
 ```sh
 npm run build:parser

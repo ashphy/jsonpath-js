@@ -10,9 +10,9 @@
 	},
 	"exports": {
 		".": {
+			"types": "./dist/index.d.ts",
 			"require": "./dist/index.js",
-			"import": "./dist/index.mjs",
-			"types": "./dist/index.d.ts"
+			"import": "./dist/index.mjs"
 		}
 	},
 	"main": "dist/index.js",
@@ -21,11 +21,19 @@
 	"engines": {
 		"node": ">=18"
 	},
-	"files": ["dist", "package.json", "README.md", "LICENSE"],
-	"keywords": ["jsonpath", "json"],
+	"files": [
+		"dist",
+		"package.json",
+		"README.md",
+		"LICENSE"
+	],
+	"keywords": [
+		"jsonpath",
+		"json"
+	],
 	"scripts": {
-		"build": "tsup ./src",
-		"build:parser": "tsx ./grammer/builder.ts",
+		"build": "tsup",
+		"build:parser": "peggy --extra-options-file src/grammar/config.js",
 		"lint": "biome check",
 		"test": "vitest"
 	},
@@ -34,11 +42,11 @@
 		"@types/jest": "^29.5.8",
 		"@types/node": "^18.7.3",
 		"npm-run-all": "^4.1.5",
-		"peggy": "^3.0.2",
-		"ts-pegjs": "^4.2.1",
+		"peggy": "^4.2.0",
 		"tsup": "^8.3.5",
 		"tsx": "^4.19.2",
 		"typescript": "^5.5.3",
-		"vitest": "^2.1.4"
-	}
+		"vitest": "^3.2.3"
+	},
+	"packageManager": "pnpm@8.15.4+sha512.0bd3a9be9eb0e9a692676deec00a303ba218ba279d99241475616b398dbaeedd11146f92c2843458f557b1d127e09d4c171e105bdcd6b61002b39685a8016b9e"
 }
