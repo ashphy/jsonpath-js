@@ -1,4 +1,4 @@
-import type { SliceSelector } from "../grammer/ast";
+import type { SliceSelector } from "../grammar/ast";
 import { type Node, type NodeList, addIndexPath } from "../types/node";
 
 // 2.3.4. Array Slice Selector

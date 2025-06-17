@@ -9,8 +9,8 @@
 		"ignoreUnknown": false,
 		"ignore": [
 			"src/jsonpath.ts",
-			"src/grammer/jsonpath_js.js",
-			"src/grammer/jsonpath_js.d.ts",
+			"src/grammar/jsonpath_js.js",
+			"src/grammar/jsonpath_js.d.ts",
 			"tests/RFC9535/jsonpath-compliance-test-suite/*"
 		]
 	},

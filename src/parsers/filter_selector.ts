@@ -20,7 +20,7 @@ import type {
 	LogicalNot,
 	LogicalOr,
 	TestFilterExpr,
-} from "../grammer/ast";
+} from "../grammar/ast";
 import type { JsonValue } from "../types/json.d";
 import type { Node, NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";

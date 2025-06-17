@@ -33,7 +33,7 @@
 	],
 	"scripts": {
 		"build": "tsup",
-		"build:parser": "peggy --extra-options-file src/grammer/config.js",
+		"build:parser": "peggy --extra-options-file src/grammar/config.js",
 		"lint": "biome check",
 		"test": "vitest"
 	},

@@ -8,7 +8,7 @@ import type {
 	Segment,
 	Selector,
 	WildcardSelector,
-} from "../grammer/ast";
+} from "../grammar/ast";
 import {
 	type Node,
 	type NodeList,
