@@ -1,13 +1,13 @@
 import {
-	type Node,
-	type NodeList,
 	addIndexPath,
 	addMemberPath,
+	type Node,
+	type NodeList,
 } from "../types/node";
 import { isJsonArray, isJsonObject, isJsonPrimitive } from "../utils";
 
 export function enumerateNode(node: Node): NodeList {
-	const { value: json, path } = node;
+	const { value: json } = node;
 	if (isJsonPrimitive(json)) {
 		return [];
 	}

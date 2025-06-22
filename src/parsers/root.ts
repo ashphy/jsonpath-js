@@ -10,10 +10,10 @@ import type {
 	WildcardSelector,
 } from "../grammar/ast";
 import {
-	type Node,
-	type NodeList,
 	addIndexPath,
 	addMemberPath,
+	type Node,
+	type NodeList,
 } from "../types/node";
 import { isJsonObject } from "../utils";
 import { traverseDescendant } from "../utils/traverseDescendant";
@@ -102,7 +102,7 @@ function applySelector(
 // 2.3.2. Wildcard Selector
 // A wildcard selector selects the nodes of all children of an object or array.
 function applyWildcardSelector(
-	selector: WildcardSelector,
+	_selector: WildcardSelector,
 	node: Node,
 ): NodeList {
 	const results: NodeList = [];
@@ -110,7 +110,7 @@ function applyWildcardSelector(
 
 	if (Array.isArray(json)) {
 		for (const a in json) {
-			if (Object.prototype.hasOwnProperty.call(node.value, a)) {
+			if (Object.hasOwn(node.value, a)) {
 				// Note that the children of an object are its member values, not its member names.
 				// results.push({ json: json[a], path: `${node.path}[${a}]` });
 				results.push(addIndexPath(node, json[a], Number(a)));
@@ -118,7 +118,7 @@ function applyWildcardSelector(
 		}
 	} else if (isJsonObject(json)) {
 		for (const a in json) {
-			if (Object.prototype.hasOwnProperty.call(json, a)) {
+			if (Object.hasOwn(json, a)) {
 				results.push(addMemberPath(node, json[a], a));
 			}
 		}
