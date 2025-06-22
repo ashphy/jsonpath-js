@@ -1,0 +1,7 @@
+pre-commit:
+  commands:
+    lint:
+      run: npm run lint
+      stage_fixed: true
+    test:
+      run: npm test -- --watch=false
