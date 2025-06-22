@@ -1,6 +1,6 @@
 import { FunctionType } from "../functions/function_types";
 import type { Json, JsonValue } from "../types/json";
-import { type Node, type NodeList, isNode, isNodeList } from "../types/node";
+import { isNode, isNodeList, type Node, type NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";
 import { isJsonPrimitive } from "../utils";
 

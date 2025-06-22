@@ -1,5 +1,4 @@
 import type { Json } from "../types/json";
-import type { Node } from "../types/node";
 import { Nothing } from "../types/nothing";
 import type { ComparisonOperators } from "./ComparisonOperators";
 

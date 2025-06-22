@@ -1,5 +1,5 @@
 import type { SliceSelector } from "../grammar/ast";
-import { type Node, type NodeList, addIndexPath } from "../types/node";
+import { addIndexPath, type Node, type NodeList } from "../types/node";
 
 // 2.3.4. Array Slice Selector
 // The array slice selector has the form <start>:<end>:<step>.

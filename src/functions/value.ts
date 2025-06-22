@@ -1,8 +1,8 @@
 import { Nothing } from "../types/nothing";
 import {
+	createFunctionDefinition,
 	NodesTypeDef,
 	ValueTypeDef,
-	createFunctionDefinition,
 } from "./function_definitions";
 
 // 2.4.8. value() Function Extension
