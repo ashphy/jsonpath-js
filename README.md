@@ -9,6 +9,10 @@
 
 An implementation of RFC 9535 [JSONPath](http://goessner.net/articles/JsonPath/)
 
+## Try Online
+
+You can test JSONPath expressions online at [https://jsonpath.com/](https://jsonpath.com/).
+
 ## Features
 
 - 100% Compatible with RFC 9535
