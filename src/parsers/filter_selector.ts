@@ -25,7 +25,7 @@ import type { JsonValue } from "../types/json.d";
 import type { Node, NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";
 import { isJsonArray, isJsonObject, isJsonPrimitive, toArray } from "../utils";
-import { enumerateNode } from "../utils/enumarateNode";
+import { enumerateNode } from "../utils/enumerateNode";
 import { applyFunction } from "./function_extentions";
 import { applyRoot, applySegments } from "./root";
 

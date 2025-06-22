@@ -1,5 +1,5 @@
 import type { Node, NodeList } from "../types/node";
-import { enumerateNode } from "./enumarateNode";
+import { enumerateNode } from "./enumerateNode";
 
 export const traverseDescendant = (node: Node): NodeList => {
 	const nodelist: NodeList = [];
