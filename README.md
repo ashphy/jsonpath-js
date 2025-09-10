@@ -42,9 +42,8 @@ const result = query.find({
 // [ 'John Doe', 'Jane Doe' ]
 console.log(result);
 
-
 const pathResult = query.paths({
-	users: [{ name: "John Doe" }, { name: "Jane Doe" }],
+  users: [{ name: "John Doe" }, { name: "Jane Doe" }],
 });
 
 // [
@@ -52,6 +51,17 @@ const pathResult = query.paths({
 // 	{ value: "Jane Doe", path: "$['users'][1]['name']" },
 // ];
 console.log(pathResult);
+
+const pathSegmentsResult = query.pathSegments({
+  users: [{ name: "John Doe" }, { name: "Jane Doe" }],
+});
+
+// NOTE: The root node $ is not included in the segments
+// [
+// 	{ value: "John Doe", segments: ["users", 0, "name"] },
+// 	{ value: "Jane Doe", segments: ["users", 1, "name"] },
+// ];
+console.log(pathSegmentsResult);
 ```
 
 ## Contributing
