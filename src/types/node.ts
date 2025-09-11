@@ -1,12 +1,12 @@
-import { escapeMemberName } from "../utils/escapeMemberName";
 import type { Json } from "./json";
 
 const nodeType: unique symbol = Symbol("NodeType");
 
-export type Node = { [nodeType]: unknown; value: Json; path: string };
+export type PathSegment = string | number;
+export type Node = { [nodeType]: unknown; value: Json; path: PathSegment[] };
 export type NodeList = Node[];
 
-export function createNode(json: Json, path: string): Node {
+export function createNode(json: Json, path: PathSegment[]): Node {
 	return { [nodeType]: undefined, value: json, path };
 }
 
@@ -15,14 +15,11 @@ export function addMemberPath(
 	newValue: Json,
 	memberName: string,
 ): Node {
-	return createNode(
-		newValue,
-		`${base.path}['${escapeMemberName(memberName)}']`,
-	);
+	return createNode(newValue, [...base.path, memberName]);
 }
 
 export function addIndexPath(base: Node, newValue: Json, index: number): Node {
-	return createNode(newValue, `${base.path}[${index}]`);
+	return createNode(newValue, [...base.path, index]);
 }
 
 export function isNode(node: unknown): node is Node {
