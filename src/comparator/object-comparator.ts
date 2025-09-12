@@ -1,5 +1,5 @@
 import type { JsonObject } from "../types/json";
-import { isEqual } from "../utils/isEqual";
+import { isEqual } from "../utils/is-equal";
 import type { ComparisonOperators } from "./ComparisonOperators";
 
 // equal objects with no duplicate names, that is, where:

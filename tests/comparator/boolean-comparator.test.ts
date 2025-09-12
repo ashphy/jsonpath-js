@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { BooleanComparator } from "../../src/comparator/BooleanComparator";
+import { BooleanComparator } from "../../src/comparator/boolean-comparator";
 
 describe("StringComparator", () => {
 	it("== returns true for equal booleans", () => {

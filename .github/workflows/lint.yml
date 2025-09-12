@@ -23,11 +23,11 @@ jobs:
       - run: npm ci
 
       - name: Copy original parser
-        run: cp -r src/grammar/jsonpath_js.js ${{ runner.temp }}
+        run: cp -r src/grammar/jsonpath-js.js ${{ runner.temp }}
       - run: npm run build:parser
       - name: Compare with original parser
         run: |
-          if ! diff -qr src/grammar/jsonpath_js.js ${{ runner.temp }}/jsonpath_js.js; then
+          if ! diff -qr src/grammar/jsonpath-js.js ${{ runner.temp }}/jsonpath-js.js; then
             echo 'Generated parser code is out of sync. Please run "npm run build:parser", and commit the changes.'
             exit 1
           fi

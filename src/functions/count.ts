@@ -2,7 +2,7 @@ import {
 	createFunctionDefinition,
 	NodesTypeDef,
 	ValueTypeDef,
-} from "./function_definitions";
+} from "./function-definitions";
 
 // 2.4.5. count() Function Extension
 // Parameters:

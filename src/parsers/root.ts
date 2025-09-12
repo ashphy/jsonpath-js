@@ -16,9 +16,9 @@ import {
 	type NodeList,
 } from "../types/node";
 import { isJsonObject } from "../utils";
-import { traverseDescendant } from "../utils/traverseDescendant";
-import { applySliceSelector } from "./array_slice_selector";
-import { applyFilterSelector } from "./filter_selector";
+import { traverseDescendant } from "../utils/traverse-descendant";
+import { applySliceSelector } from "./array-slice-selector";
+import { applyFilterSelector } from "./filter-selector";
 
 // 2.2. Root Identifier
 // Every JSONPath query MUST begin with the root identifier $.

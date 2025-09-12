@@ -1,5 +1,5 @@
 import { expect } from "vitest";
-import { JSONPathJS } from "../src/jsonpath_js";
+import { JSONPathJS } from "../src/jsonpath-js";
 import type { Json, JsonArray } from "../src/types/json";
 
 export function testJSONPath({

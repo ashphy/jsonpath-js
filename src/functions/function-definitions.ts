@@ -1,4 +1,4 @@
-import { FunctionType } from "../functions/function_types";
+import { FunctionType } from "../functions/function-types";
 import type { Json, JsonValue } from "../types/json";
 import { isNode, isNodeList, type Node, type NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";

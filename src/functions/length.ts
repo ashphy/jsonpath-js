@@ -1,7 +1,7 @@
 import { Nothing } from "../types/nothing";
 import { isJsonObject } from "../utils";
-import { createFunctionDefinition, ValueTypeDef } from "./function_definitions";
-import type { FunctionType } from "./function_types";
+import { createFunctionDefinition, ValueTypeDef } from "./function-definitions";
+import type { FunctionType } from "./function-types";
 
 // 2.4.4. length() Function Extension
 // Parameters:

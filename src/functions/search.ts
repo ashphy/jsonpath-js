@@ -1,10 +1,10 @@
-import { convertIRegexpToJsRegexp } from "../utils/convertIRegexpToJsRegexp";
+import { convertIRegexpToJsRegexp } from "../utils/convert-iregexp-to-js-regexp";
 import {
 	createFunctionDefinition,
 	LogicalTypeDef,
 	ValueTypeDef,
-} from "./function_definitions";
-import { convertLogicalType, FunctionType } from "./function_types";
+} from "./function-definitions";
+import { convertLogicalType, FunctionType } from "./function-types";
 
 // 2.4.7. search() Function Extension
 // Parameters:

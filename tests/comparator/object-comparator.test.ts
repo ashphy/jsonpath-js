@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ObjectComparator } from "../../src/comparator/ObjectComparator";
+import { ObjectComparator } from "../../src/comparator/object-comparator";
 
 describe("ObjectComparator", () => {
 	describe("== operator", () => {

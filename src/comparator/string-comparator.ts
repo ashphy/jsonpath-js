@@ -1,4 +1,4 @@
-import type { ComparisonOperators } from "./ComparisonOperators";
+import type { ComparisonOperators } from "./comparison-operators";
 
 // a non-empty string compares less than another non-empty string
 // if and only if the first string starts with a lower Unicode scalar

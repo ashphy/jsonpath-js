@@ -10,8 +10,8 @@
 		"includes": [
 			"**",
 			"!**/src/jsonpath.ts",
-			"!**/src/grammar/jsonpath_js.js",
-			"!**/src/grammar/jsonpath_js.d.ts",
+			"!**/src/grammar/jsonpath-js.js",
+			"!**/src/grammar/jsonpath-js.d.ts",
 			"!**/tests/RFC9535/jsonpath-compliance-test-suite/**/*"
 		]
 	},
@@ -35,7 +35,14 @@
 				"noUnusedTemplateLiteral": "error",
 				"useNumberNamespace": "error",
 				"noInferrableTypes": "error",
-				"noUselessElse": "error"
+				"noUselessElse": "error",
+				"useFilenamingConvention": {
+					"level": "error",
+					"options": {
+						"requireAscii": true,
+						"filenameCases": ["kebab-case"]
+					}
+				}
 			}
 		},
 		"includes": ["**", "!**/package.json"]
