@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { createNode } from "../../src/types/node";
-import { traverseDescendant } from "../../src/utils/traverseDescendant";
+import { traverseDescendant } from "../../src/utils/traverse-descendant";
 
 describe("traverseDescendant", () => {
 	test("empty object traverses empty", () => {

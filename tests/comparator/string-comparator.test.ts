@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { StringComparator } from "../../src/comparator/StringComparator";
+import { StringComparator } from "../../src/comparator/string-comparator";
 
 describe("StringComparator", () => {
 	it("== returns true for equal strings", () => {

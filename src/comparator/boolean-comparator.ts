@@ -1,4 +1,4 @@
-import type { ComparisonOperators } from "./ComparisonOperators";
+import type { ComparisonOperators } from "./comparison-operators";
 
 export const BooleanComparator: ComparisonOperators<boolean> = {
 	"=="(a, b) {

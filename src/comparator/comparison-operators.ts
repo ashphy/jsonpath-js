@@ -1,4 +1,4 @@
-import type { Operators } from "./Operators";
+import type { Operators } from "./operators";
 
 export type Comparator<T> = (a: T, b: T) => boolean;
 

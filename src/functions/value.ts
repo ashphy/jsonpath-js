@@ -3,7 +3,7 @@ import {
 	createFunctionDefinition,
 	NodesTypeDef,
 	ValueTypeDef,
-} from "./function_definitions";
+} from "./function-definitions";
 
 // 2.4.8. value() Function Extension
 // Parameters:

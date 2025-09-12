@@ -1,5 +1,5 @@
 import { describe, expect, test as it } from "vitest";
-import { NumericComparator } from "../../src/comparator/NumericComparator";
+import { NumericComparator } from "../../src/comparator/numeric-comparator";
 
 describe("NumericComparator", () => {
 	it("== returns true for equal number", () => {

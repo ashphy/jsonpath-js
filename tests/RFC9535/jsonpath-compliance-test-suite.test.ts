@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { JSONPathJS } from "../../src/jsonpath_js";
+import { JSONPathJS } from "../../src/jsonpath-js";
 import type { JsonValue } from "../../src/types/json";
 import { testJSONPath, testNormalizedPath } from "../utils";
 import cts from "./jsonpath-compliance-test-suite/cts.json";

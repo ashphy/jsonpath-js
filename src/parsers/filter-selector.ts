@@ -1,11 +1,11 @@
-import { ArrayComparator } from "../comparator/ArrayComparator";
-import { BooleanComparator } from "../comparator/BooleanComparator";
-import { NodeComparator } from "../comparator/NodeComparator";
-import { NullComparator } from "../comparator/NullComparator";
-import { NumericComparator } from "../comparator/NumericComparator";
-import { ObjectComparator } from "../comparator/ObjectComparator";
-import { StringComparator } from "../comparator/StringComparator";
-import { FunctionType, isLogicalType } from "../functions/function_types";
+import { ArrayComparator } from "../comparator/array-comparator";
+import { BooleanComparator } from "../comparator/boolean-comparator";
+import { NodeComparator } from "../comparator/node-comparator";
+import { NullComparator } from "../comparator/null-comparator";
+import { NumericComparator } from "../comparator/numeric-comparator";
+import { ObjectComparator } from "../comparator/object-comparator";
+import { StringComparator } from "../comparator/string-comparator";
+import { FunctionType, isLogicalType } from "../functions/function-types";
 import type {
 	Comparable,
 	ComparisonExpr,
@@ -25,8 +25,8 @@ import type { JsonValue } from "../types/json.d";
 import type { Node, NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";
 import { isJsonArray, isJsonObject, isJsonPrimitive } from "../utils";
-import { enumerateNode } from "../utils/enumerateNode";
-import { applyFunction } from "./function_extentions";
+import { enumerateNode } from "../utils/enumerate-node";
+import { applyFunction } from "./function-extentions";
 import { applyRoot, applySegments } from "./root";
 
 // 2.3.5. Filter Selector

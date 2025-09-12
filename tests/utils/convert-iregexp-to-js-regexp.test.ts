@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { convertIRegexpToJsRegexp } from "../../src/utils/convertIRegexpToJsRegexp";
+import { convertIRegexpToJsRegexp } from "../../src/utils/convert-iregexp-to-js-regexp";
 
 describe("convertIRegexpToJsRegexp", () => {
 	test("For any unescaped dots (.) outside character classes eplace the dot with [^\n\r]", () => {

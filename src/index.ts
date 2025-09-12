@@ -1,3 +1,3 @@
-import { JSONPathJS } from "./jsonpath_js";
+import { JSONPathJS } from "./jsonpath-js";
 
 export { JSONPathJS };

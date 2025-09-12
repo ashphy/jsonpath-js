@@ -1,8 +1,8 @@
 import type { JsonpathQuery } from "./grammar/ast";
-import { parse } from "./grammar/jsonpath_js";
+import { parse } from "./grammar/jsonpath-js";
 import { run } from "./parser";
 import type { Json } from "./types/json";
-import { escapeMemberName } from "./utils/escapeMemberName";
+import { escapeMemberName } from "./utils/escape-member-name";
 
 type PathResult = {
 	value: Json;

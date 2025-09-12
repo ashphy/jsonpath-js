@@ -1,6 +1,6 @@
 import { CountFunction } from "../functions/count";
-import { extractArgs } from "../functions/function_definitions";
-import type { FunctionType } from "../functions/function_types";
+import { extractArgs } from "../functions/function-definitions";
+import type { FunctionType } from "../functions/function-types";
 import { LengthFunction } from "../functions/length";
 import { MatchFunction } from "../functions/match";
 import { SearchFunction } from "../functions/search";
@@ -9,7 +9,7 @@ import type { FunctionArgument, FunctionExpr } from "../grammar/ast";
 import type { Json } from "../types/json";
 import type { Node, NodeList } from "../types/node";
 import { Nothing } from "../types/nothing";
-import { applyCurrentNode } from "./filter_selector";
+import { applyCurrentNode } from "./filter-selector";
 import { applyRoot } from "./root";
 
 const FunctionDefinitions = {

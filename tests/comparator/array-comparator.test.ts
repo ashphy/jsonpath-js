@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ArrayComparator } from "../../src/comparator/ArrayComparator";
+import { ArrayComparator } from "../../src/comparator/array-comparator";
 
 describe("ArrayComparator", () => {
 	describe("== operator", () => {
