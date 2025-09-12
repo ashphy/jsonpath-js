@@ -26,7 +26,7 @@ export class JSONPathJS {
 	 * @param query - The JSONPath query string to parse
 	 * @throws Throws an error if the query string is invalid
 	 */
-	constructor(private query: string) {
+	constructor(query: string) {
 		const parseResult = parse(query);
 		this.rootNode = parseResult;
 	}
