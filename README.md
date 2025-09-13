@@ -2,7 +2,7 @@
 
 ![GitHub License](https://img.shields.io/github/license/ashphy/jsonpath-js)
 [![NPM Version](https://img.shields.io/npm/v/jsonpath-js)](https://www.npmjs.com/package/jsonpath-js)
-[![Link Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
+[![Lint Checker](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml/badge.svg)](https://github.com/ashphy/jsonpath-js/actions/workflows/lint.yml)
 
 > [!WARNING]
 > This library is still in its initial development stage, so please be aware that the API is subject to change.
