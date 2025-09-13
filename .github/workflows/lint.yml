@@ -44,7 +44,12 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npx biome ci
+
+      - name: Lint
+        run: npx biome ci
+
+      - name: Typecheck
+        run: npm run typecheck
 
   test-node:
     runs-on: ubuntu-latest

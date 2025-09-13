@@ -1,6 +1,6 @@
 import type { Json } from "../types/json";
 import { Nothing } from "../types/nothing";
-import type { ComparisonOperators } from "./ComparisonOperators";
+import type { ComparisonOperators } from "./comparison-operators";
 
 // When either side of a comparison results in an empty nodelist or the special result Nothing
 // - A comparison using the operator == yields true if and only the other side also results

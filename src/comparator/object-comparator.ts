@@ -1,6 +1,6 @@
 import type { JsonObject } from "../types/json";
 import { isEqual } from "../utils/is-equal";
-import type { ComparisonOperators } from "./ComparisonOperators";
+import type { ComparisonOperators } from "./comparison-operators";
 
 // equal objects with no duplicate names, that is, where:
 // both objects have the same collection of names (with no duplicates) and

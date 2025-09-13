@@ -110,7 +110,7 @@ function applyWildcardSelector(
 
 	if (Array.isArray(json)) {
 		for (const a in json) {
-			if (Object.hasOwn(node.value, a)) {
+			if (Object.hasOwn(json, a)) {
 				// Note that the children of an object are its member values, not its member names.
 				// results.push({ json: json[a], path: `${node.path}[${a}]` });
 				results.push(addIndexPath(node, json[a], Number(a)));

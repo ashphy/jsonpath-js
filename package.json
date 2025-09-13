@@ -35,6 +35,7 @@
 		"build": "tsup",
 		"build:parser": "peggy --extra-options-file src/grammar/config.js",
 		"lint": "biome check",
+		"typecheck": "tsc --noEmit -p tsconfig.esm.json",
 		"test": "vitest"
 	},
 	"devDependencies": {
