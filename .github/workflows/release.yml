@@ -8,7 +8,7 @@ jobs:
   deploy:
     permissions:
       contents: read
-      id-token: write
+      id-token: write # Required for obtaining OIDC token
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,16 +20,15 @@ jobs:
           node-version: 20
           cache: npm
 
+      # npm trusted publishing requires npm 11.5.1 or later
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Install
         run: npm ci
 
       - name: Build
         run: npm run build
 
-      - id: publish
-        name: Publish to NPM
-        uses: JS-DevTools/npm-publish@v3
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          access: public
-          provenance: true
+      - name: Publish to NPM
+        run: npm publish
