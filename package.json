@@ -1,6 +1,6 @@
 {
 	"name": "jsonpath-js",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "An implementation of JSONPath",
 	"author": "ashphy <ne.vivam.si.abis@gmail.com>",
 	"license": "MIT",
