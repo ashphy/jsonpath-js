@@ -1,4 +1,4 @@
-import type { ComparisonOperators } from "./ComparisonOperators";
+import type { ComparisonOperators } from "./comparison-operators";
 
 export const NumericComparator: ComparisonOperators<number> = {
 	"=="(a, b) {

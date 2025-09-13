@@ -3,5 +3,7 @@ pre-commit:
     lint:
       run: npm run lint
       stage_fixed: true
+    typecheck:
+      run: npm run typecheck
     test:
       run: npm test -- --watch=false
