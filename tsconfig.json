@@ -3,7 +3,7 @@
 		"target": "ES2022",
 		"module": "CommonJS",
 		"lib": ["ES2023"],
-		"moduleResolution": "Node",
+		"moduleResolution": "Bundler",
 		"esModuleInterop": true,
 		"strict": true,
 		"types": ["node"],
