@@ -1,11 +1,12 @@
 # Security Policy
 
 ## Supported Versions
+
 We provide security updates for the following versions of this project:
 
-| Version | Status | Notes |
-|---------|--------|-------|
-| 0.x.x | ✅ Supported | Receives all security fixes. |
+| Version | Status       | Notes                        |
+| ------- | ------------ | ---------------------------- |
+| 0.x.x   | ✅ Supported | Receives all security fixes. |
 
 ## Reporting a Vulnerability
 
@@ -17,6 +18,7 @@ If you believe you have found a security issue, please report it **privately via
 We follow a responsible disclosure process. Reports will remain confidential until a fix is released and users have had a reasonable upgrade window.
 
 ## Initial Response
+
 We aim to acknowledge security reports as quickly as reasonably possible.
 Our first reply will confirm receipt and may request additional information or reproduction steps.
 
@@ -28,11 +30,13 @@ When possible, please include:
 - Proof-of-concept or patch (if available)
 
 ## Patch Release Policy
+
 - Fixes are released as soon as reasonably possible for supported versions.
 - If the main branch contains breaking changes, we will back-port the fix to the current stable branch and publish a patch release (e.g., `vX.Y.Z`).
 - Release notes will describe the vulnerability (severity, impact, CVSS) without full exploit details until a reasonable upgrade window has passed.
 
 ## Disclosure Policy
+
 We follow **Coordinated Vulnerability Disclosure (CVD)**:
 
 1. Vulnerability reported privately.

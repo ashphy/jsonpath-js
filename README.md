@@ -36,14 +36,14 @@ import { JSONPathJS } from "jsonpath-js";
 
 const query = new JSONPathJS("$.users[*].name");
 const result = query.find({
-  users: [{ name: "John Doe" }, { name: "Jane Doe" }],
+	users: [{ name: "John Doe" }, { name: "Jane Doe" }],
 });
 
 // [ 'John Doe', 'Jane Doe' ]
 console.log(result);
 
 const pathResult = query.paths({
-  users: [{ name: "John Doe" }, { name: "Jane Doe" }],
+	users: [{ name: "John Doe" }, { name: "Jane Doe" }],
 });
 
 // [
@@ -53,7 +53,7 @@ const pathResult = query.paths({
 console.log(pathResult);
 
 const pathSegmentsResult = query.pathSegments({
-  users: [{ name: "John Doe" }, { name: "Jane Doe" }],
+	users: [{ name: "John Doe" }, { name: "Jane Doe" }],
 });
 
 // NOTE: The root node $ is not included in the segments
